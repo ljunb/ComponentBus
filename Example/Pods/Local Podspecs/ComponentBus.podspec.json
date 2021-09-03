@@ -1,0 +1,22 @@
+{
+  "name": "ComponentBus",
+  "version": "0.0.1",
+  "summary": "ComponentBus是一个基于组件总线的通信框架。",
+  "description": "ComponentBus是一个基于组件总线的通信框架，支持渐进式组件化。",
+  "homepage": "https://github.com/ljunb/ComponentBus",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "ljunb": "824771861@qq.com"
+  },
+  "source": {
+    "git": "https://github.com/ljunb/ComponentBus.git",
+    "tag": "0.0.1"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "Sources/**/*"
+}

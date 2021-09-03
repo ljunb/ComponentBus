@@ -1,0 +1,16 @@
+PODS:
+  - ComponentBus (0.0.1)
+
+DEPENDENCIES:
+  - ComponentBus (from `../`)
+
+EXTERNAL SOURCES:
+  ComponentBus:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  ComponentBus: 93121a940096c1bfdfa9e9f222141a51418bafca
+
+PODFILE CHECKSUM: 597daa73b6f2c64566805ba84f84efa0ad2b8afd
+
+COCOAPODS: 1.10.0
