@@ -1,16 +1,16 @@
 PODS:
-  - ComponentBus (0.0.1)
+  - CBus (0.0.1)
 
 DEPENDENCIES:
-  - ComponentBus (from `../`)
+  - CBus (from `../`)
 
 EXTERNAL SOURCES:
-  ComponentBus:
+  CBus:
     :path: "../"
 
 SPEC CHECKSUMS:
-  ComponentBus: 93121a940096c1bfdfa9e9f222141a51418bafca
+  CBus: 53551b5bce675bc27141f2305e0f7a96ae84e1c2
 
-PODFILE CHECKSUM: 597daa73b6f2c64566805ba84f84efa0ad2b8afd
+PODFILE CHECKSUM: f2a00098d901de19aeec7b0bbf34ee89eb36b0a2
 
 COCOAPODS: 1.10.0

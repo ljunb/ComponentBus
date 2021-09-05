@@ -8,8 +8,9 @@
 #import <Foundation/Foundation.h>
 #import "CBusDefines.h"
 
-NS_ASSUME_NONNULL_BEGIN
+@class UIViewController;
 
+NS_ASSUME_NONNULL_BEGIN
 
 @protocol CBusModule <NSObject>
 

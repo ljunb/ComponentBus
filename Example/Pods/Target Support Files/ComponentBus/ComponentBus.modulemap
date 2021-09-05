@@ -1,6 +1,0 @@
-framework module ComponentBus {
-  umbrella header "ComponentBus-umbrella.h"
-
-  export *
-  module * { export * }
-}

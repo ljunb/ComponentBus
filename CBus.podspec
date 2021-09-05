@@ -7,11 +7,11 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'ComponentBus'
+  s.name             = 'CBus'
   s.version          = '0.0.1'
-  s.summary          = 'ComponentBus是一个基于组件总线的通信框架。'
+  s.summary          = 'CBus是一个基于组件总线的通信框架。'
   s.description      = <<-DESC
-                       ComponentBus是一个基于组件总线的通信框架，支持渐进式组件化。
+                       CBus是一个基于组件总线的通信框架，支持渐进式组件化。
                        DESC
   s.homepage         = 'https://github.com/ljunb/ComponentBus'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }

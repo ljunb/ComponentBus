@@ -21,7 +21,7 @@
               page:(NSString *)pageName
             params:(NSDictionary *)params
            context:(__kindof UIViewController *)context
-        completion:(id)completion {
+        completion:(CBusCompletion)completion {
     
     BOOL result = NO;
     @try {
@@ -30,7 +30,8 @@
             return NO;
         }
         
-        id<CBusModule> module = (id<CBusModule>)CBusClassForModuleName(moduleName);
+        Class moduleClass = CBusClassForModuleName(moduleName);
+        id<CBusModule> module = [moduleClass new];
         if ([module respondsToSelector:@selector(openPage:params:context:completion:)]) {
             result = [module openPage:pageName params:params context:context completion:completion];
         }

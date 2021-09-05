@@ -3,11 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		33D33E8E33FCFB774455353C /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7F389A95C177835586A201 /* Pods_Example.framework */; };
 		3482978E26E27B7800446263 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3482978D26E27B7800446263 /* AppDelegate.m */; };
 		3482979126E27B7800446263 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3482979026E27B7800446263 /* SceneDelegate.m */; };
 		3482979426E27B7800446263 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3482979326E27B7800446263 /* ViewController.m */; };
@@ -17,6 +16,9 @@
 		3482979F26E27B7800446263 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3482979E26E27B7800446263 /* main.m */; };
 		348297A926E27B7900446263 /* ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 348297A826E27B7900446263 /* ExampleTests.m */; };
 		348297B426E27B7900446263 /* ExampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 348297B326E27B7900446263 /* ExampleUITests.m */; };
+		348297DF26E285C400446263 /* libHomeModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 348297DE26E285C400446263 /* libHomeModule.a */; };
+		3482980226E5195500446263 /* libUserModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3482980126E5195500446263 /* libUserModule.a */; };
+		C768776E93BEDABA2BA562BA /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FFAF9D83A059339BCD1161D /* Pods_Example.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0F7F389A95C177835586A201 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2FFAF9D83A059339BCD1161D /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3482978926E27B7800446263 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3482978C26E27B7800446263 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3482978D26E27B7800446263 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -56,6 +58,8 @@
 		348297AF26E27B7900446263 /* ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		348297B326E27B7900446263 /* ExampleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleUITests.m; sourceTree = "<group>"; };
 		348297B526E27B7900446263 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		348297DE26E285C400446263 /* libHomeModule.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libHomeModule.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3482980126E5195500446263 /* libUserModule.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libUserModule.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B1BDBD5681FB9929B87D668 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		E19A04B5CE594BC5191F4E9C /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,7 +69,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33D33E8E33FCFB774455353C /* Pods_Example.framework in Frameworks */,
+				3482980226E5195500446263 /* libUserModule.a in Frameworks */,
+				348297DF26E285C400446263 /* libHomeModule.a in Frameworks */,
+				C768776E93BEDABA2BA562BA /* Pods_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,7 +98,6 @@
 				E19A04B5CE594BC5191F4E9C /* Pods-Example.debug.xcconfig */,
 				7B1BDBD5681FB9929B87D668 /* Pods-Example.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -157,7 +162,9 @@
 		4AED86734D1E062C4B529710 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0F7F389A95C177835586A201 /* Pods_Example.framework */,
+				3482980126E5195500446263 /* libUserModule.a */,
+				348297DE26E285C400446263 /* libHomeModule.a */,
+				2FFAF9D83A059339BCD1161D /* Pods_Example.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -173,7 +180,7 @@
 				3482978526E27B7800446263 /* Sources */,
 				3482978626E27B7800446263 /* Frameworks */,
 				3482978726E27B7800446263 /* Resources */,
-				2B45C08015A27E156FFF778F /* [CP] Embed Pods Frameworks */,
+				A6E86F4CFB5D1A41C39215F0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -289,7 +296,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2B45C08015A27E156FFF778F /* [CP] Embed Pods Frameworks */ = {
+		A6E86F4CFB5D1A41C39215F0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -517,6 +524,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -534,6 +546,11 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
