@@ -1,3 +1,7 @@
-.idea
+.idea/
 Example/Pods
 Example/Example.xcworkspace
+*.xcuserstate
+*.xcuserdatad/
+*.xcuserdata/
+xcuserdata

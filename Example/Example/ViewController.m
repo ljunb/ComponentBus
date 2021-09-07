@@ -8,15 +8,15 @@
 #import "ViewController.h"
 #import <CBus/CBusManager.h>
 #import <CBus/CBus.h>
-#import <CBus/CBusModule.h>
+#import <CBus/CBusRequest.h>
+#import <CBus/CBusResponse.h>
 
-@interface ViewController ()<CBusModule>
+@interface ViewController ()
 
 @end
 
 @implementation ViewController
 
-CBUS_REGISTER_MODULE(view);
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,12 +24,9 @@ CBUS_REGISTER_MODULE(view);
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [CBus openModule:@"home" page:@"index" params:nil context:self];
+    CBusRequest *requst = [CBusRequest requestWithComponent:@"home" action:@"index" params:nil];
+    [CBus open:requst context:self complete:nil];
 }
 
-- (BOOL)openPage:(NSString *)pageName params:(NSDictionary *)params context:(__kindof UIViewController *)context completion:(CBusCompletion)completion {
-    NSLog(@"%@ %@", pageName, params);
-    return NO;
-}
 
 @end

@@ -6,8 +6,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CBus/CBusModule.h>
+#import <CBus/CBusComponent.h>
 
-@interface HomeModule : NSObject<CBusModule>
+@interface HomeModule : NSObject<CBusComponent>
 
 @end

@@ -9,9 +9,12 @@
 
 @implementation UserModule
 
-CBUS_REGISTER_MODULE(user);
+CBUS_REGISTER_COMPONENT(user)
 
-- (BOOL)openPage:(NSString *)pageName params:(NSDictionary *)params context:(__kindof UIViewController *)context completion:(CBusCompletion)completion {
+- (BOOL)openPage:(NSString *)pageName
+          params:(NSDictionary *)params
+         context:(nullable __kindof UIViewController *)context
+      completion:(nullable CBusAsyncCallResponse)completion{
     return NO;
 }
 

@@ -12,16 +12,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol CBusModule <NSObject>
+@protocol CBusComponent <NSObject>
 
-#define CBUS_REGISTER_MODULE(module_name) \
-CBUS_EXTERN void CBusResigterModule(Class); \
-+ (NSString *)moduleName { return @#module_name; } \
-+ (void)load { CBusResigterModule(self); }
+#define CBUS_REGISTER_COMPONENT(name) \
+CBUS_EXTERN void CBusResigterComponent(Class); \
++ (NSString *)componentName { return @#name; } \
++ (void)load { CBusResigterComponent(self); }
 
-+ (NSString *)moduleName;
++ (NSString *)componentName;
 
-CBUS_EXTERN Class CBusClassForModuleName(NSString *moduleName);
+CBUS_EXTERN NSDictionary<NSString *, id<CBusComponent>>* CBusGetComponentMap(void);
 
 
 @required
@@ -37,7 +37,7 @@ CBUS_EXTERN Class CBusClassForModuleName(NSString *moduleName);
 - (BOOL)openPage:(NSString *)pageName
           params:(nullable NSDictionary *)params
          context:(nullable __kindof UIViewController *)context
-      completion:(nullable CBusCompletion)completion;
+      completion:(nullable CBusAsyncCallResponse)completion;
 
 @end
 
