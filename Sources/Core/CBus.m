@@ -58,10 +58,12 @@ CBusClient *CBusGetClient(void) {
 }
 
 + (void)enqueue:(CBusRequest *)request complete:(CBusAsyncCallResponse)complete {
-    // todo...
+    CBus *cbus = [CBus cbusWithRequest:request];
+    [[cbus.client newCall:cbus] enqueue:complete];
 }
 
 - (void)finished:(CBusResponse *)response {
+    // todo: notify async callback
     CBus_LOCK(_lock);
     if (!_isFinished) {
         _isFinished = YES;

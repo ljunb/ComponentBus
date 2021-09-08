@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CBusDefines.h"
 
 @class CBusClient;
 @class CBus;
@@ -18,7 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) CBusClient *client;
 
 + (instancetype)realCallWithClient:(CBusClient *)client cbus:(CBus *)cbus;
+
 - (void)execute;
+- (void)enqueue:(CBusAsyncCallResponse)callback;
 
 @end
 

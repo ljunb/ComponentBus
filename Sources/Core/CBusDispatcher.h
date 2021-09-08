@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CBusDefines.h"
 
 @class CBusRealCall;
 
@@ -22,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * 执行一个异步调用
  */
-- (void)enqueue:(CBusRealCall *)call;
+- (void)enqueue:(CBusRealCall *)call complete:(CBusAsyncCallResponse)complete;
 
 /**
  * 结束一个同步调用

@@ -29,6 +29,7 @@
         _readyAsyncCalls = [NSMutableArray array];
         _lock = dispatch_semaphore_create(1);
         _dispatchQueue = [[NSOperationQueue alloc] init];
+        _dispatchQueue.maxConcurrentOperationCount = 64;
         _dispatchQueue.name = @"com.xiaopeng.cbus_dispatcher_async_queue";
     }
     return self;
@@ -53,21 +54,30 @@
     }
 }
 
-- (void)enqueue:(CBusRealCall *)call {
-    NSBlockOperation *asyncBlock = [[NSBlockOperation alloc] init];
+- (void)enqueue:(CBusRealCall *)call complete:(nonnull CBusAsyncCallResponse)complete {
+    CBusRequest *request = call.cbus.request;
+    id<CBusComponent> component = [CBusGetComponentMap() objectForKey:request.component];
+    NSString *targetActionStr = [NSString stringWithFormat:@"__cbus_action__%@:", request.action];
+    SEL actionSel = NSSelectorFromString(targetActionStr);
     
-    __weak typeof(asyncBlock) weakBlock = asyncBlock;
-    [asyncBlock addExecutionBlock:^{
-        if (weakBlock.isCancelled) {
-            return;
-        }
+    if ([component conformsToProtocol:@protocol(CBusComponent)] && [component respondsToSelector:actionSel]) {
+        NSBlockOperation *asyncBlock = [[NSBlockOperation alloc] init];
+        __weak typeof(asyncBlock) weakBlock = asyncBlock;
+        [asyncBlock addExecutionBlock:^{
+            if (weakBlock.isCancelled) {
+                return;
+            }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            [component performSelector:actionSel withObject:call.cbus];
+#pragma clang diagnostic pop
+        }];
+        [_dispatchQueue addOperation:asyncBlock];
         
-    }];
-    [_dispatchQueue addOperation:asyncBlock];
-    
-    CBus_LOCK(_lock);
-    [_runningAsyncCalls addObject:call];
-    CBus_UNLOCK(_lock);
+        CBus_LOCK(_lock);
+        [_runningAsyncCalls addObject:call];
+        CBus_UNLOCK(_lock);
+    }
 }
 
 - (void)finished:(CBusRealCall *)call {

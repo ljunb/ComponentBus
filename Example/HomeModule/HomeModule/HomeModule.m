@@ -19,4 +19,13 @@ CBUS_ACTION(testAction) {
     [cbus finished:res];
 }
 
+CBUS_ACTION(asyncAction) {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [NSThread sleepForTimeInterval:3];
+        
+        CBusResponse *res = [CBusResponse success:@{@"status": @"success"}];
+        [cbus finished:res];
+    });
+}
+
 @end

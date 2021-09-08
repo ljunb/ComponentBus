@@ -30,9 +30,8 @@
 typedef void(^CBusCompletion)(id _Nullable result, NSError * _Nullable error);
 
 @class CBus;
-@class CBusRequest;
 @class CBusResponse;
 
-typedef void(^CBusAsyncCallResponse)(CBusRequest * _Nonnull req, CBus * _Nonnull cbus);
+typedef void(^CBusAsyncCallResponse)(CBus * _Nonnull cbus);
 
 #endif /* CBusDefines_h */

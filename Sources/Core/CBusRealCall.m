@@ -11,6 +11,7 @@
 
 @implementation CBusRealCall {
     BOOL _isExecuted;
+    CBusAsyncCallResponse _asyncCallback;
 }
 
 @synthesize cbus = _cbus;
@@ -32,6 +33,17 @@
 - (void)execute {
     @try {
         [_client.dispatcher executed:self];
+    } @catch (NSException *exception) {
+        // todo timeout
+    } @finally {
+        [_client.dispatcher finished:self];
+    }
+}
+
+- (void)enqueue:(CBusAsyncCallResponse)callback {
+    @try {
+        _asyncCallback = [callback copy];
+        [_client.dispatcher enqueue:self complete:callback];
     } @catch (NSException *exception) {
         // todo timeout
     } @finally {

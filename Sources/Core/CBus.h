@@ -8,6 +8,8 @@
 #import <Foundation/Foundation.h>
 #import "CBusDefines.h"
 
+@class CBusRequest;
+@class CBusResponse;
 @class CBusClient;
 
 NS_ASSUME_NONNULL_BEGIN

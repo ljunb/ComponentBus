@@ -24,10 +24,15 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    CBus *cbus = [CBus callRequestWithComponent:@"home" action:@"testAction" params:@{@"name": @"cbus"}];
-    if (cbus.response.success) {
-        NSLog(@"CBus response: %@", cbus.response);
-    }
+//    CBus *cbus = [CBus callRequestWithComponent:@"home" action:@"testAction" params:@{@"name": @"cbus"}];
+//    if (cbus.response.success) {
+//        NSLog(@"CBus response: %@", cbus.response);
+//    }
+    
+    CBusRequest *req = [CBusRequest requestWithComponent:@"home" action:@"asyncAction" params:nil];
+    [CBus enqueue:req complete:^(CBus * _Nonnull cbus) {
+            
+    }];
 }
 
 
