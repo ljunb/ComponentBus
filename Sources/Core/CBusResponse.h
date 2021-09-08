@@ -18,6 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign, readonly) BOOL success;
 
++ (instancetype)success:(NSDictionary *)response;
++ (instancetype)failed:(NSDictionary *)response;
++ (instancetype)failed:(NSDictionary *)response code:(NSInteger)code;
+
 @end
 
 NS_ASSUME_NONNULL_END

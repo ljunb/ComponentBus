@@ -24,8 +24,10 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    CBusRequest *requst = [CBusRequest requestWithComponent:@"home" action:@"index" params:nil];
-    [CBus open:requst context:self complete:nil];
+    CBus *cbus = [CBus callRequestWithComponent:@"home" action:@"testAction" params:@{@"name": @"cbus"}];
+    if (cbus.response.success) {
+        NSLog(@"CBus response: %@", cbus.response);
+    }
 }
 
 
