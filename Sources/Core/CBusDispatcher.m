@@ -43,6 +43,14 @@
     SEL actionSel = NSSelectorFromString(targetActionStr);
     
     if ([component conformsToProtocol:@protocol(CBusComponent)] && [component respondsToSelector:actionSel]) {
+        // 已经达到最大值
+        if (_dispatchQueue.operationCount >= _dispatchQueue.maxConcurrentOperationCount) {
+            CBus_LOCK(_lock);
+            [_readyAsyncCalls addObject:call];
+            CBus_UNLOCK(_lock);
+            return;
+        }
+        
         CBus_LOCK(_lock);
         [_runningSyncCalls addObject:call];
         CBus_UNLOCK(_lock);
@@ -54,7 +62,7 @@
     }
 }
 
-- (void)enqueue:(CBusRealCall *)call complete:(nonnull CBusAsyncCallResponse)complete {
+- (void)enqueue:(CBusRealCall *)call complete:(nonnull CBusAsyncCallCompletion)complete {
     CBusRequest *request = call.cbus.request;
     id<CBusComponent> component = [CBusGetComponentMap() objectForKey:request.component];
     NSString *targetActionStr = [NSString stringWithFormat:@"__cbus_action__%@:", request.action];
@@ -81,6 +89,7 @@
 }
 
 - (void)finished:(CBusRealCall *)call {
+    // todo: 结束调用后，移除不再计算超时
     CBus_LOCK(_lock);
     [_runningSyncCalls removeObject:call];
     CBus_UNLOCK(_lock);

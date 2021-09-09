@@ -9,7 +9,6 @@
 #import "CBusDefines.h"
 
 @class CBusClient;
-@class CBus;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,8 +19,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)realCallWithClient:(CBusClient *)client cbus:(CBus *)cbus;
 
+/// 同步执行一个方法
 - (void)execute;
-- (void)enqueue:(CBusAsyncCallResponse)callback;
+
+/**
+ * 执行异步方法
+ *
+ * @param callback 异步回调
+ */
+- (void)enqueue:(CBusAsyncCallCompletion)callback;
 
 @end
 

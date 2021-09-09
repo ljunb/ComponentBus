@@ -12,11 +12,21 @@
 
 @implementation HomeModule
 
-CBUS_REGISTER_COMPONENT(home)
+CBUS_COMPONENT(home)
 
 CBUS_ACTION(testAction) {
-    CBusResponse *res = [CBusResponse success:@{@"status": @"success", @"message": @"this is a message from test action"}];
-    [cbus finished:res];
+    CBus *newCbus = [CBus callRequestWithComponent:@"user" action:@"userInfo" params:nil];
+    
+    CBusResponse *res;
+    if (newCbus.response.success) {
+        NSDictionary *baseInfo = @{@"status": @"success", @"message": @"userInfo is return nil!"};
+        NSMutableDictionary *ext = [NSMutableDictionary dictionaryWithDictionary:newCbus.response.result ?: baseInfo];
+        res = [CBusResponse success:ext];
+        [cbus finished:res];
+    } else {
+        res = [CBusResponse failed:@{@"status": @"failed"}];
+        [cbus finished:res];
+    }
 }
 
 CBUS_ACTION(asyncAction) {

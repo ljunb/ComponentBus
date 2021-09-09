@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * 执行一个异步调用
  */
-- (void)enqueue:(CBusRealCall *)call complete:(CBusAsyncCallResponse)complete;
+- (void)enqueue:(CBusRealCall *)call complete:(CBusAsyncCallCompletion)complete;
 
 /**
  * 结束一个同步调用

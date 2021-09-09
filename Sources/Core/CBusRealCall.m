@@ -11,7 +11,7 @@
 
 @implementation CBusRealCall {
     BOOL _isExecuted;
-    CBusAsyncCallResponse _asyncCallback;
+    CBusAsyncCallCompletion _asyncCallback;
 }
 
 @synthesize cbus = _cbus;
@@ -40,7 +40,7 @@
     }
 }
 
-- (void)enqueue:(CBusAsyncCallResponse)callback {
+- (void)enqueue:(CBusAsyncCallCompletion)callback {
     @try {
         _asyncCallback = [callback copy];
         [_client.dispatcher enqueue:self complete:callback];

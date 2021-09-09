@@ -9,11 +9,12 @@
 
 #import "CBusClient.h"
 #import "CBusRealCall.h"
-#import "CBusComponent.h"
-#import "CBusResponse.h"
-#import "CBusRequest.h"
+#import "CBusComponentRegister.h"
 
 
+/**
+ * CBus将内置一个默认的CBusClient，管理着默认的CBusDispatcher
+ */
 static CBusClient *cbusClient;
 CBusClient *CBusGetClient(void) {
     static dispatch_once_t onceToken;
@@ -26,6 +27,7 @@ CBusClient *CBusGetClient(void) {
 
 @implementation CBus {
     BOOL _isFinished;
+    BOOL _isWaiting;
     dispatch_semaphore_t _lock;
 }
 
@@ -46,9 +48,35 @@ CBusClient *CBusGetClient(void) {
     return self;
 }
 
++ (void)setCBusClient:(CBusClient *)client {
+    cbusClient = client;
+}
+
+
+#pragma mark - CBusRequest caller
++ (CBus *)callRequestWithComponent:(NSString *)component action:(NSString *)action {
+    return [self callRequestWithComponent:component action:action params:nil];
+}
+
 + (CBus *)callRequestWithComponent:(NSString *)component action:(NSString *)action params:(NSDictionary *)params {
     CBusRequest *request = [CBusRequest requestWithComponent:component action:action params:params];
     return [self execute:request];
+}
+
++ (void)asyncCallRequestWithComponent:(NSString *)component action:(NSString *)action {
+    [self asyncCallRequestWithComponent:component action:action params:nil complete:nil];
+}
+
++ (void)asyncCallRequestWithComponent:(NSString *)component action:(NSString *)action params:(NSDictionary *)params {
+    [self asyncCallRequestWithComponent:component action:action params:params complete:nil];
+}
+
++ (void)asyncCallRequestWithComponent:(NSString *)component
+                               action:(NSString *)action
+                               params:(NSDictionary *)params
+                             complete:(CBusAsyncCallCompletion)complete {
+    CBusRequest *request = [CBusRequest requestWithComponent:component action:action params:params];
+    [self enqueue:request complete:complete];
 }
 
 + (CBus *)execute:(CBusRequest *)request {
@@ -57,19 +85,33 @@ CBusClient *CBusGetClient(void) {
     return cbus;
 }
 
-+ (void)enqueue:(CBusRequest *)request complete:(CBusAsyncCallResponse)complete {
++ (void)enqueue:(CBusRequest *)request complete:(CBusAsyncCallCompletion)complete {
     CBus *cbus = [CBus cbusWithRequest:request];
     [[cbus.client newCall:cbus] enqueue:complete];
 }
 
 - (void)finished:(CBusResponse *)response {
-    // todo: notify async callback
+    // CBusResponse的设置可能位于不同线程，这里需要加锁
     CBus_LOCK(_lock);
     if (!_isFinished) {
         _isFinished = YES;
         _response = response;
     }
     CBus_UNLOCK(_lock);
+}
+
+
+#pragma mark - Dynamic Component register
++ (void)registerDynamicComponentForClass:(Class)componentClass {
+    [CBusComponentRegister registerDynamicComponentForClass:componentClass];
+}
+
++ (void)unregisterDynamicComponentForClass:(Class)componentClass {
+    [CBusComponentRegister unregisterDynamicComponentForClass:componentClass];
+}
+
++ (void)unregisterDynamicComponentForName:(NSString *)componentName {
+    [CBusComponentRegister unregisterDynamicComponentForName:componentName];
 }
 
 @end

@@ -6,16 +6,15 @@
 //
 
 #import "UserModule.h"
+#import <CBus/CBus.h>
 
 @implementation UserModule
 
-CBUS_REGISTER_COMPONENT(user)
+CBUS_DYNAMIC_COMPONENT(user)
 
-- (BOOL)openPage:(NSString *)pageName
-          params:(NSDictionary *)params
-         context:(nullable __kindof UIViewController *)context
-      completion:(nullable CBusAsyncCallResponse)completion{
-    return NO;
+CBUS_ACTION(userInfo) {
+    CBusResponse *response = [CBusResponse success:@{@"userInfo": @{@"name": @"cbus", @"address": @"guangzhou"}}];
+    [cbus finished:response];
 }
 
 @end
