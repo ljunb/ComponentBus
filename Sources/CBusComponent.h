@@ -15,8 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol CBusComponent <NSObject>
 
-/// 获取当前所有的组件字典
-CBUS_EXTERN NSDictionary<NSString *, id<CBusComponent>>* CBusGetComponentMap(void);
+/**
+ * 根据组件名称获取对应的实例
+ * @param cmpName 组件名称
+ * @return 组件实例，静态组件or动态组件
+ */
+CBUS_EXTERN id<CBusComponent> CBusGetComponentInstanceForName(NSString *cmpName);
 
 
 /**
@@ -41,7 +45,7 @@ CBUS_COMPONENT(#name) \
  * 标记一个可用于其他组件访问的方法
  */
 #define CBUS_ACTION(sel_name) \
-- (void)__cbus_action__##sel_name:(CBus *)cbus CBUS_DYNAMIC
+- (void)__cbus_action__##sel_name:(CBus *)cbus CBUS_OBJC_DYNAMIC
 
 
 @optional

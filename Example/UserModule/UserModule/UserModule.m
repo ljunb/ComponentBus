@@ -10,7 +10,7 @@
 
 @implementation UserModule
 
-CBUS_DYNAMIC_COMPONENT(user)
+CBUS_COMPONENT(user)
 
 CBUS_ACTION(userInfo) {
     CBusResponse *response = [CBusResponse success:@{@"userInfo": @{@"name": @"cbus", @"address": @"guangzhou"}}];

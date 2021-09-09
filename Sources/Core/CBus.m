@@ -24,6 +24,10 @@ CBusClient *CBusGetClient(void) {
     return cbusClient;
 }
 
+// 环境相关
+static BOOL _isDebug = NO;
+static BOOL _isEnableLog = NO;
+
 
 @implementation CBus {
     BOOL _isFinished;
@@ -96,6 +100,8 @@ CBusClient *CBusGetClient(void) {
     if (!_isFinished) {
         _isFinished = YES;
         _response = response;
+        
+        // todo: notify async call completion
     }
     CBus_UNLOCK(_lock);
 }
@@ -112,6 +118,24 @@ CBusClient *CBusGetClient(void) {
 
 + (void)unregisterDynamicComponentForName:(NSString *)componentName {
     [CBusComponentRegister unregisterDynamicComponentForName:componentName];
+}
+
+
+#pragma mark - getter
++ (BOOL)isDebug {
+    return _isDebug;
+}
+
++ (void)setIsDebug:(BOOL)isDebug {
+    _isDebug = isDebug;
+}
+
++ (BOOL)isEnableLog {
+    return _isEnableLog;
+}
+
++ (void)setIsEnableLog:(BOOL)isEnableLog {
+    _isEnableLog = isEnableLog;
 }
 
 @end

@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 超时设置
 @property (nonatomic, assign, readonly) NSTimeInterval timeout;
 
+@property (nonatomic, assign, readonly) BOOL isDeliverOnMainThread;
+
 
 + (instancetype)requestWithComponent:(NSString *)component
                               action:(NSString *)action
@@ -29,6 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
                               action:(NSString *)action
                               params:(nullable NSDictionary *)params
                              timeout:(NSTimeInterval)timeout;
+
+- (void)deliverOnMainThread;
 
 @end
 

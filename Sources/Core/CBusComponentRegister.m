@@ -7,11 +7,15 @@
 
 #import "CBusComponentRegister.h"
 #import "CBusComponent.h"
+#import "CBusException.h"
 
 
-static NSMutableArray<Class> *CBusComponentClasses;
+/// 所有组件的类型注册表，格式：{ componentName: componentClass }
+static NSMutableDictionary<NSString *, Class> *CBusComponentClassMap;
+/// 所有静/动态态组件的注册表，格式：{ componentName: id<CBusComponent>instance }
 static NSMutableDictionary<NSString *, id<CBusComponent>> *CBusComponentMap;
 static NSMutableDictionary<NSString *, id<CBusComponent>> *CBusDynamicComponentMap;
+/// 组件注册队列
 static dispatch_queue_t CBusComponentSyncQueue;
 
 /// 获取静态组件注册表
@@ -39,8 +43,8 @@ NSDictionary<NSString *, id<CBusComponent>>* CBusGetDynamicComponentMap(void) {
  */
 NSString *CBusNameForComponentClass(Class cmpClass) {
     if (![cmpClass conformsToProtocol:@protocol(CBusComponent)]) {
-        NSLog(@"%@ does not conform to the CBusComponent protocol", NSStringFromClass(cmpClass));
-        @throw nil;
+        NSDictionary *extInfo = @{@"componentClass": NSStringFromClass(cmpClass)};
+        [CBusException boom:CBusCodeNotConformsToProtocol extraInfo:extInfo];
     }
     
     NSString *cmpName = [cmpClass componentName];
@@ -51,32 +55,54 @@ NSString *CBusNameForComponentClass(Class cmpClass) {
 }
 
 /**
+ * 根据组件名称，获取对应的组件实例
+ * @param cmpName 组件类型
+ * @return 组件实例，静态组件or动态组件。如果组件为nil，则直接抛出异常
+ */
+id<CBusComponent> CBusGetComponentInstanceForName(NSString *cmpName) {
+    if (!cmpName || cmpName.length == 0) {
+        [CBusException boom:CBusCodeComponentNameEmpty];
+    }
+    
+    __block id<CBusComponent> instance;
+    dispatch_sync(CBusComponentSyncQueue, ^{
+        Class cmpClass = CBusComponentClassMap[cmpName];
+        BOOL isDynamic = [cmpClass respondsToSelector:@selector(isDynamic)] && [cmpClass isDynamic];
+        instance = isDynamic ? CBusDynamicComponentMap[cmpName] : CBusComponentMap[cmpName];
+    });
+    
+    if (!instance) {
+        NSDictionary *extInfo = @{@"componentName": cmpName};
+        [CBusException boom:CBusCodeComponentNotRegistered extraInfo:extInfo];
+    }
+    return instance;
+}
+
+/**
  * 注册组件类型，如果是非动态组件，将直接新建空实例
  */
 void CBusResigterComponent(Class);
 void CBusResigterComponent(Class cmpClass) {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        CBusComponentClasses = [NSMutableArray array];
+        CBusComponentClassMap = [NSMutableDictionary dictionary];
         CBusComponentMap = [NSMutableDictionary dictionary];
         CBusDynamicComponentMap = [NSMutableDictionary dictionary];
         CBusComponentSyncQueue = dispatch_queue_create("com.xiaopeng.cbus_component_class_sync_queue", DISPATCH_QUEUE_CONCURRENT);
     });
     
     if (![cmpClass conformsToProtocol:@protocol(CBusComponent)]) {
-        NSLog(@"%@ does not conform to the CBusComponent protocol", NSStringFromClass(cmpClass));
-        return;
+        NSDictionary *extInfo = @{@"componentClass": NSStringFromClass(cmpClass)};
+        [CBusException boom:CBusCodeNotConformsToProtocol extraInfo:extInfo];
     }
     
     dispatch_barrier_async(CBusComponentSyncQueue, ^{
-        if (![CBusComponentClasses containsObject:cmpClass]) {
-            [CBusComponentClasses addObject:cmpClass];
-        }
+        NSString *cmpName = CBusNameForComponentClass(cmpClass);
+        CBusComponentClassMap[cmpName] = cmpClass;
         
         // 非动态组件
         BOOL isDynamic = [cmpClass respondsToSelector:@selector(isDynamic)] && [cmpClass isDynamic];
         if (!isDynamic) {
-            NSString *cmpName = CBusNameForComponentClass(cmpClass);
             [CBusComponentMap setObject:(id<CBusComponent>)[cmpClass new] forKey:cmpName];
         }
     });
@@ -87,16 +113,17 @@ void CBusResigterComponent(Class cmpClass) {
 
 + (void)registerDynamicComponentForClass:(Class)componentClass {
     if (![componentClass conformsToProtocol:@protocol(CBusComponent)]) {
-        NSLog(@"dynamic component %@ not conforms to protocol(CBusComponent)!", NSStringFromClass(componentClass));
-        return;
+        NSDictionary *extInfo = @{@"componentClass": NSStringFromClass(componentClass)};
+        [CBusException boom:CBusCodeNotConformsToProtocol extraInfo:extInfo];
     }
+    
     if (![componentClass respondsToSelector:@selector(isDynamic)] || ![componentClass isDynamic]) {
         NSLog(@"component %@ is not a dynamic component!", NSStringFromClass(componentClass));
         return;
     }
     
     NSString *componentName = CBusNameForComponentClass(componentClass);
-    id<CBusComponent> oldCmp = (id<CBusComponent>)[CBusGetDynamicComponentMap() objectForKey:componentName];
+    id<CBusComponent> oldCmp = (id<CBusComponent>)CBusGetDynamicComponentMap()[componentName];
     id<CBusComponent> newCmp = (id<CBusComponent>)[componentClass new];
     
     if (oldCmp) {
@@ -106,16 +133,15 @@ void CBusResigterComponent(Class cmpClass) {
     }
     
     dispatch_barrier_async(CBusComponentSyncQueue, ^{
-        if (![CBusComponentClasses containsObject:componentClass]) {
-            [CBusComponentClasses addObject:componentClass];
-        }
-        [CBusDynamicComponentMap setObject:newCmp forKey:componentName];
+        CBusComponentClassMap[componentName] = componentClass;
+        CBusDynamicComponentMap[componentName] = newCmp;
     });
 }
 
 + (void)unregisterDynamicComponentForClass:(Class)componentClass {
     if (![componentClass conformsToProtocol:@protocol(CBusComponent)]) {
-        NSLog(@"dynamic component %@ does not conform to the CBusComponent protocol!", NSStringFromClass(componentClass));
+        NSDictionary *extInfo = @{@"componentClass": NSStringFromClass(componentClass)};
+        [CBusException boom:CBusCodeNotConformsToProtocol extraInfo:extInfo];
     }
     NSString *name = CBusNameForComponentClass(componentClass);
     [self unregisterDynamicComponentForName:name];
@@ -123,13 +149,11 @@ void CBusResigterComponent(Class cmpClass) {
 
 + (void)unregisterDynamicComponentForName:(NSString *)componentName {
     if (!componentName || componentName.length == 0) {
-        NSLog(@"couldn't unregister dynamic component which is nil!");
-        return;
+        [CBusException boom:CBusCodeComponentNameEmpty];
     }
     
-    Class targetClass = [CBusGetDynamicComponentMap() objectForKey:componentName];
     dispatch_barrier_async(CBusComponentSyncQueue, ^{
-        [CBusComponentClasses removeObject:targetClass];
+        [CBusComponentClassMap removeObjectForKey:componentName];
         [CBusDynamicComponentMap removeObjectForKey:componentName];
     });
 }

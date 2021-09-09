@@ -6,12 +6,12 @@
 //
 
 #import "CBusRealCall.h"
-#import "CBusClient.h"
+#import "CBus.h"
 #import "CBusDispatcher.h"
+#import "CBusAsyncCall.h"
 
 @implementation CBusRealCall {
     BOOL _isExecuted;
-    CBusAsyncCallCompletion _asyncCallback;
 }
 
 @synthesize cbus = _cbus;
@@ -31,24 +31,38 @@
 }
 
 - (void)execute {
+    if (_isExecuted) {
+        CBusResponse *res = [CBusResponse failedCode:CBusCodeAleadyExecuted];
+        [_cbus finished:res];
+        [_client.dispatcher finishedCall:self];
+        return;
+    }
+    
     @try {
+        _isExecuted = YES;
         [_client.dispatcher executed:self];
     } @catch (NSException *exception) {
         // todo timeout
+        NSLog(@"exception: %@", [exception userInfo]);
     } @finally {
-        [_client.dispatcher finished:self];
+        [_client.dispatcher finishedCall:self];
     }
 }
 
 - (void)enqueue:(CBusAsyncCallCompletion)callback {
-    @try {
-        _asyncCallback = [callback copy];
-        [_client.dispatcher enqueue:self complete:callback];
-    } @catch (NSException *exception) {
-        // todo timeout
-    } @finally {
-        [_client.dispatcher finished:self];
+    if (_isExecuted) {
+        CBusResponse *res = [CBusResponse failedCode:CBusCodeAleadyExecuted];
+        [_cbus finished:res];
+        [_client.dispatcher onResult:_cbus completion:callback];
+        return;
     }
+    
+    CBusAsyncCall *asyncCall = [CBusAsyncCall asyncCallWithCBus:_cbus realCall:self completion:callback];
+    [_client.dispatcher enqueue:asyncCall];
+}
+
+- (CBusRequest *)originRequest {
+    return _cbus.request;
 }
 
 @end

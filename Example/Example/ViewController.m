@@ -21,10 +21,20 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self testSyncAction];
+}
+
+- (void)testSyncAction {
     CBus *cbus = [CBus callRequestWithComponent:@"user" action:@"userInfo" params:@{@"name": @"cbus"}];
     if (cbus.response.success) {
         NSLog(@"CBus response: %@", cbus.response);
     }
+}
+
+- (void)testAsyncAction {
+    [CBus asyncCallRequestWithComponent:@"home" action:@"asyncAction" params:nil complete:^(CBus * _Nonnull cbus) {
+            
+    }];
 }
 
 

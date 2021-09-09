@@ -13,6 +13,7 @@
 @synthesize action = _action;
 @synthesize params = _params;
 @synthesize timeout = _timeout;
+@synthesize isDeliverOnMainThread = _isDeliverOnMainThread;
 
 + (instancetype)requestWithComponent:(NSString *)component action:(NSString *)action params:(NSDictionary *)params {
     return [self requestWithComponent:component action:action params:params timeout:2];
@@ -36,6 +37,10 @@
         _timeout = timeout;
     }
     return self;
+}
+
+- (void)deliverOnMainThread {
+    _isDeliverOnMainThread = YES;
 }
 
 @end

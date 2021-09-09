@@ -9,6 +9,7 @@
 #import "CBusDefines.h"
 
 @class CBusClient;
+@class CBusRequest;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, readonly) CBus *cbus;
 @property (nonatomic, strong, readonly) CBusClient *client;
+@property (nonatomic, strong, readonly) CBusRequest *originRequest;
 
 + (instancetype)realCallWithClient:(CBusClient *)client cbus:(CBus *)cbus;
 

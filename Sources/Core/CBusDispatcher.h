@@ -9,6 +9,7 @@
 #import "CBusDefines.h"
 
 @class CBusRealCall;
+@class CBusAsyncCall;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,14 +23,28 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * 执行一个异步调用
+ * @param asyncCall 异步调用实体
  */
-- (void)enqueue:(CBusRealCall *)call complete:(CBusAsyncCallCompletion)complete;
+- (void)enqueue:(CBusAsyncCall *)asyncCall;
+
+/**
+ * 触发异步方法回调
+ * @param cbus 回调参数，响应结果的cbus实例
+ * @param completion 结束回调
+ */
+- (void)onResult:(CBus *)cbus completion:(CBusAsyncCallCompletion)completion;
 
 /**
  * 结束一个同步调用
  * @param call 同步调用实体
  */
-- (void)finished:(CBusRealCall *)call;
+- (void)finishedCall:(CBusRealCall *)call;
+
+/**
+ * 结束一个异步调用
+ * @param asyncCall 异步调用实体
+ */
+- (void)finishedAsyncCall:(CBusAsyncCall *)asyncCall;
 
 /// 取消所有的异步方法调用
 - (void)cancelAllCalls;

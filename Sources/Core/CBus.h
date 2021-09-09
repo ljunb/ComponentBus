@@ -21,6 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) CBusRequest *request;
 /// cbus结果响应实体
 @property (nonatomic, strong, readonly) CBusResponse *response;
+/// YES：开启debug模式；否则不开启
+@property (nonatomic, assign, class) BOOL isDebug;
+/// 是否开启log
+@property (nonatomic, assign, class) BOOL isEnableLog;
 
 
 /**
