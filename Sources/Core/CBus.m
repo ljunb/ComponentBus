@@ -84,6 +84,15 @@ static BOOL _isEnableLog = NO;
     [self enqueue:request complete:complete];
 }
 
++ (void)asyncCallRequestWithComponent:(NSString *)component
+                               action:(NSString *)action
+                               params:(NSDictionary *)params
+                 completeOnMainThread:(CBusAsyncCallCompletion)complete {
+    CBusRequest *request = [CBusRequest requestWithComponent:component action:action params:params];
+    [request deliverOnMainThread];
+    [self enqueue:request complete:complete];
+}
+
 + (CBus *)execute:(CBusRequest *)request {
     CBus *cbus = [CBus cbusWithRequest:request];
     [[cbus.client newCall:cbus] execute];

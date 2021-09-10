@@ -61,6 +61,19 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)asyncCallRequestWithComponent:(NSString *)component action:(NSString *)action params:(nullable NSDictionary *)params;
 + (void)asyncCallRequestWithComponent:(NSString *)component action:(NSString *)action;
 
+/**
+ * 快速发起一个异步CBusRequest，并将结束回调抛到主线程
+ *
+ * @param component 组件名称
+ * @param action 目标事件名称
+ * @param params 请求参数
+ * @param complete 结束回调，将切回主线程
+ */
++ (void)asyncCallRequestWithComponent:(NSString *)component
+                               action:(NSString *)action
+                               params:(nullable NSDictionary *)params
+                 completeOnMainThread:(nullable CBusAsyncCallCompletion)complete;
+
 
 /**
  * 触发一个同步请求

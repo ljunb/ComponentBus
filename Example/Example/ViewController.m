@@ -21,7 +21,7 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self testSyncAction];
+    [self testAsyncCompleteOnMainThread];
 }
 
 - (void)testSyncAction {
@@ -35,8 +35,14 @@
     NSLog(@"test start: %f", NSTimeIntervalSince1970);
     [CBus asyncCallRequestWithComponent:@"home" action:@"asyncAction" params:nil complete:^(CBus * _Nonnull cbus) {
         NSLog(@"test end %f", NSTimeIntervalSince1970);
+        NSLog(@"testAsyncAction: current thread %@", NSThread.currentThread);
     }];
 }
 
+- (void)testAsyncCompleteOnMainThread {
+    [CBus asyncCallRequestWithComponent:@"home" action:@"asyncAction" params:nil completeOnMainThread:^(CBus * _Nonnull cbus) {
+        NSLog(@"testAsyncCompleteOnMainThread: current thread %@", NSThread.currentThread);
+    }];
+}
 
 @end

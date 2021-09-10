@@ -47,22 +47,7 @@
             return;
         }
         // start task
-        [self performRealCall];
         [self handleAsyncCallCompletion];
-    }
-}
-
-- (void)performRealCall {
-    // we are ensure call request no-nil in dispather
-    id<CBusComponent> component = CBusGetComponentInstanceForName(self.request.component);
-    NSString *targetActionStr = [NSString stringWithFormat:@"__cbus_action__%@:", self.request.action];
-    SEL actionSel = NSSelectorFromString(targetActionStr);
-    
-    if ([component respondsToSelector:actionSel]) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [component performSelector:actionSel withObject:_cbus];
-#pragma clang diagnostic pop
     }
 }
 
@@ -77,6 +62,7 @@
         [_cbus finished:response];
         [_realCall.client.dispatcher onResult:_cbus completion:_completion];
     } @catch (NSException *exception) {
+        // todo: handle timeout
         NSLog(@"NSException %@", [exception userInfo]);
     } @finally {
         [self done];
