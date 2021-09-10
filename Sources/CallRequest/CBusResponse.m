@@ -39,4 +39,8 @@
     return self;
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"CBusResponse: success=%d, code=%lu, result: %@", _success, (unsigned long)_code, _result];
+}
+
 @end

@@ -10,14 +10,18 @@
 @class CBus;
 @class CBusRealCall;
 @class CBusDispatcher;
+@protocol CBusInterceptor;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CBusClient : NSObject
 
 @property (nonatomic, strong, readonly) CBusDispatcher *dispatcher;
+@property (nonatomic, copy, readonly) NSArray<id<CBusInterceptor>> *interceptors;
 
 - (CBusRealCall *)newCall:(CBus *)cbus;
+
+- (void)addInterceptor:(id<CBusInterceptor>)interceptor;
 
 @end
 

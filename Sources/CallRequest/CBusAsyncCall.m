@@ -6,15 +6,17 @@
 //
 
 #import "CBusAsyncCall.h"
+#import "CBus.h"
 #import "CBusRealCall.h"
 #import "CBusComponent.h"
-#import "CBusRequest.h"
 #import "CBusException.h"
+#import "CBusDispatcher.h"
 
 @implementation CBusAsyncCall
 
 @synthesize executing = _executing;
 @synthesize finished = _finished;
+// from CBusCall properties
 @synthesize cbus = _cbus;
 @synthesize realCall = _realCall;
 @synthesize completion = _completion;
@@ -40,19 +42,20 @@
 - (void)start {
     @autoreleasepool {
         self.executing = YES;
-        if (self.cancelled) {
+        if (self.isCancelled) {
             [self done];
             return;
         }
-        
+        // start task
         [self performRealCall];
+        [self handleAsyncCallCompletion];
     }
 }
 
 - (void)performRealCall {
     // we are ensure call request no-nil in dispather
-    id<CBusComponent> component = CBusGetComponentInstanceForName(self.originRequest.component);
-    NSString *targetActionStr = [NSString stringWithFormat:@"__cbus_action__%@:", self.originRequest.action];
+    id<CBusComponent> component = CBusGetComponentInstanceForName(self.request.component);
+    NSString *targetActionStr = [NSString stringWithFormat:@"__cbus_action__%@:", self.request.action];
     SEL actionSel = NSSelectorFromString(targetActionStr);
     
     if ([component respondsToSelector:actionSel]) {
@@ -60,6 +63,24 @@
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         [component performSelector:actionSel withObject:_cbus];
 #pragma clang diagnostic pop
+    }
+}
+
+- (void)handleAsyncCallCompletion {
+    @try {
+        CBusResponse *response = [_realCall responseOnInterceptorChain];
+        // check if canceled
+        if (_cbus.isCanceled || self.isCancelled) {
+            response = [CBusResponse failedCode:CBusCodeCanceled];
+        }
+        // call completion
+        [_cbus finished:response];
+        [_realCall.client.dispatcher onResult:_cbus completion:_completion];
+    } @catch (NSException *exception) {
+        NSLog(@"NSException %@", [exception userInfo]);
+    } @finally {
+        [self done];
+        [_realCall.client.dispatcher finishedAsyncCall:self];
     }
 }
 
@@ -94,8 +115,8 @@
     return _finished;
 }
 
-- (CBusRequest *)originRequest {
-    return _realCall.originRequest;
+- (CBusRequest *)request {
+    return _realCall.request;
 }
 
 @end

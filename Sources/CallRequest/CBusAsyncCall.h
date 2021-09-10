@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CBusDefines.h"
+#import "CBusCall.h"
 
 @class CBus;
 @class CBusRealCall;
@@ -14,12 +15,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CBusAsyncCall : NSOperation
+@interface CBusAsyncCall : NSOperation<CBusCall>
 
 @property (nonatomic, strong, readonly) CBus *cbus;
 @property (nonatomic, strong, readonly) CBusRealCall *realCall;
 @property (nonatomic, copy, readonly) CBusAsyncCallCompletion completion;
-@property (nonatomic, strong, readonly) CBusRequest *originRequest;
 
 + (instancetype)asyncCallWithCBus:(CBus *)cbus realCall:(CBusRealCall *)realCall completion:(CBusAsyncCallCompletion)completion;
 

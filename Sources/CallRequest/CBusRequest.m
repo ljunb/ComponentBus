@@ -43,4 +43,8 @@
     _isDeliverOnMainThread = YES;
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"CBusRequest: component=%@, action=%@, params: %@", _component, _action, _params];
+}
+
 @end

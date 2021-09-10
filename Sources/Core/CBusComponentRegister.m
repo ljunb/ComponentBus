@@ -60,21 +60,12 @@ NSString *CBusNameForComponentClass(Class cmpClass) {
  * @return 组件实例，静态组件or动态组件。如果组件为nil，则直接抛出异常
  */
 id<CBusComponent> CBusGetComponentInstanceForName(NSString *cmpName) {
-    if (!cmpName || cmpName.length == 0) {
-        [CBusException boom:CBusCodeComponentNameEmpty];
-    }
-    
     __block id<CBusComponent> instance;
     dispatch_sync(CBusComponentSyncQueue, ^{
         Class cmpClass = CBusComponentClassMap[cmpName];
         BOOL isDynamic = [cmpClass respondsToSelector:@selector(isDynamic)] && [cmpClass isDynamic];
         instance = isDynamic ? CBusDynamicComponentMap[cmpName] : CBusComponentMap[cmpName];
     });
-    
-    if (!instance) {
-        NSDictionary *extInfo = @{@"componentName": cmpName};
-        [CBusException boom:CBusCodeComponentNotRegistered extraInfo:extInfo];
-    }
     return instance;
 }
 

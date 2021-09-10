@@ -37,29 +37,13 @@
 }
 
 - (void)executed:(CBusRealCall *)call {
-    CBusRequest *request = call.cbus.request;
-    if (!request) {
-        [CBusException boom:CBusCodeRequestNull];
-    }
-    
-    id<CBusComponent> component = CBusGetComponentInstanceForName(request.component);
-    NSString *targetActionStr = [NSString stringWithFormat:@"__cbus_action__%@:", request.action];
-    SEL actionSel = NSSelectorFromString(targetActionStr);
-    
-    if ([component conformsToProtocol:@protocol(CBusComponent)] && [component respondsToSelector:actionSel]) {
-        CBus_LOCK(_lock);
-        [_runningSyncCalls addObject:call];
-        CBus_UNLOCK(_lock);
-        
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [component performSelector:actionSel withObject:call.cbus];
-#pragma clang diagnostic pop
-    }
+    CBus_LOCK(_lock);
+    [_runningSyncCalls addObject:call];
+    CBus_UNLOCK(_lock);
 }
 
 - (void)enqueue:(CBusAsyncCall *)asyncCall {
-    CBusRequest *request = asyncCall.originRequest;
+    CBusRequest *request = asyncCall.request;
     if (!request) {
         [CBusException boom:CBusCodeRequestNull];
     }
@@ -82,6 +66,7 @@
     if (!completion) {
         return;
     }
+    // invoke on main thread
     if (cbus.request.isDeliverOnMainThread) {
         dispatch_async(dispatch_get_main_queue(), ^{
             completion(cbus);

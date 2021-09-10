@@ -33,9 +33,11 @@ typedef NS_ENUM(NSUInteger, CBusCode) {
     CBusCodeRequestNull = 10001,
     CBusCodeTimeout = 10002,
     CBusCodeAleadyExecuted = 10003,
-    CBusCodeComponentNotRegistered = 20001,
+    CBusCodeCanceled = 10004,
+    CBusCodeComponentNotFound = 20001,
     CBusCodeComponentNameEmpty = 20002,
-    CBusCodeNotConformsToProtocol = 20003,
+    CBusCodeNotConformsToProtocol = 30001,
+    CBusCodeNotRecognizeSelector = 30002,
 };
 
 CBUS_EXTERN NSString * _Nonnull CBusDescriptionForCode(CBusCode code);

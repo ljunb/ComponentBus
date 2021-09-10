@@ -30,14 +30,15 @@ static BOOL _isEnableLog = NO;
 
 
 @implementation CBus {
-    BOOL _isFinished;
     BOOL _isWaiting;
-    dispatch_semaphore_t _lock;
+    NSCondition *_waitingLock;
 }
 
 @synthesize client = _client;
 @synthesize request = _request;
 @synthesize response = _response;
+@synthesize isFinished = _isFinished;
+@synthesize isCanceled = _isCanceled;
 
 + (instancetype)cbusWithRequest:(CBusRequest *)request {
     return [[self alloc] initWithRequest:request];
@@ -45,7 +46,7 @@ static BOOL _isEnableLog = NO;
 
 - (instancetype)initWithRequest:(CBusRequest *)request {
     if (self = [super init]) {
-        _lock = dispatch_semaphore_create(1);
+        _waitingLock = [[NSCondition alloc] init];
         _request = request;
         _client = CBusGetClient();
     }
@@ -96,14 +97,42 @@ static BOOL _isEnableLog = NO;
 
 - (void)finished:(CBusResponse *)response {
     // CBusResponse的设置可能位于不同线程，这里需要加锁
-    CBus_LOCK(_lock);
-    if (!_isFinished) {
-        _isFinished = YES;
-        _response = response;
-        
-        // todo: notify async call completion
+    [_waitingLock lock];
+    if (_isFinished) {
+        return;
     }
-    CBus_UNLOCK(_lock);
+    
+    _isFinished = YES;
+    _response = response;
+    
+    // 如果等待中的，那么直接唤醒线程继续执行
+    if (_isWaiting) {
+        _isWaiting = false;
+        NSLog(@"wait response broadccast");
+        [_waitingLock broadcast];
+    }
+    
+    [_waitingLock unlock];
+}
+
+- (void)cancel {
+    [_waitingLock lock];
+    _isCanceled = YES;
+    [_waitingLock unlock];
+}
+
+- (void)waitResponse {
+    [_waitingLock lock];
+    if (!_isFinished) {
+        @try {
+            NSLog(@"wait response begin!");
+            _isWaiting = YES;
+            [_waitingLock wait];
+        } @catch (NSException *exception) {
+            
+        }
+    }
+    [_waitingLock unlock];
 }
 
 

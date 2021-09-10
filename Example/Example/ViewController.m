@@ -25,15 +25,16 @@
 }
 
 - (void)testSyncAction {
-    CBus *cbus = [CBus callRequestWithComponent:@"user" action:@"userInfo" params:@{@"name": @"cbus"}];
+    CBus *cbus = [CBus callRequestWithComponent:@"use1r" action:@"userInfo" params:@{@"name": @"cbus"}];
     if (cbus.response.success) {
         NSLog(@"CBus response: %@", cbus.response);
     }
 }
 
 - (void)testAsyncAction {
+    NSLog(@"test start: %f", NSTimeIntervalSince1970);
     [CBus asyncCallRequestWithComponent:@"home" action:@"asyncAction" params:nil complete:^(CBus * _Nonnull cbus) {
-            
+        NSLog(@"test end %f", NSTimeIntervalSince1970);
     }];
 }
 

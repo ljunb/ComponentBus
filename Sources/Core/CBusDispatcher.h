@@ -35,13 +35,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)onResult:(CBus *)cbus completion:(CBusAsyncCallCompletion)completion;
 
 /**
- * 结束一个同步调用
+ * 结束一个同步调用，从内存中进行超时管理的字典中移除
  * @param call 同步调用实体
  */
 - (void)finishedCall:(CBusRealCall *)call;
 
 /**
- * 结束一个异步调用
+ * 结束一个异步调用，从内存中进行超时管理的字典中移除
  * @param asyncCall 异步调用实体
  */
 - (void)finishedAsyncCall:(CBusAsyncCall *)asyncCall;

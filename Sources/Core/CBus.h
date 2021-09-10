@@ -15,17 +15,25 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CBus : NSObject
+
+#pragma mark - class property
+/// YES：开启debug模式；否则不开启
+@property (nonatomic, assign, class) BOOL isDebug;
+/// 是否开启log
+@property (nonatomic, assign, class) BOOL isEnableLog;
+
+
+#pragma mark - instance property
 /// 每个cbus中绑定的client对象，其持有方法调用队列的管理者CBusDispatcher
 @property (nonatomic, strong, readonly) CBusClient *client;
 /// cbus的请求实体
 @property (nonatomic, strong, readonly) CBusRequest *request;
 /// cbus结果响应实体
 @property (nonatomic, strong, readonly) CBusResponse *response;
-/// YES：开启debug模式；否则不开启
-@property (nonatomic, assign, class) BOOL isDebug;
-/// 是否开启log
-@property (nonatomic, assign, class) BOOL isEnableLog;
-
+/// 是否响应结束
+@property (nonatomic, assign, readonly) BOOL isFinished;
+/// 是否取消
+@property (nonatomic, assign, readonly) BOOL isCanceled;
 
 /**
  * 快速发起一个同步CBusRequest
@@ -75,6 +83,11 @@ NS_ASSUME_NONNULL_BEGIN
  * @param response 响应结果实体
  */
 - (void)finished:(CBusResponse *)response;
+
+- (void)cancel;
+
+/// 等待一个异步响应
+- (void)waitResponse;
 
 
 /**

@@ -13,9 +13,10 @@ NSString *CBusDescriptionForCode(CBusCode code) {
     if (code == CBusCodeTimeout) { return @"请求超时"; }
     if (code == CBusCodeRequestNull) { return @"请求实体不能为空"; }
     if (code == CBusCodeAleadyExecuted) { return @"不能重复触发当前请求"; }
-    if (code == CBusCodeComponentNotRegistered) { return @"当前组件没有注册"; }
+    if (code == CBusCodeComponentNotFound) { return @"未能找到对应组件"; }
     if (code == CBusCodeComponentNameEmpty) { return @"组件名称不能为空"; }
     if (code == CBusCodeNotConformsToProtocol) { return @"当前组件没有实现CBusComponent协议"; }
+    if (code == CBusCodeNotRecognizeSelector) { return @"当前组件没有实现对应方法"; }
     return @"未知错误";
 }
 
