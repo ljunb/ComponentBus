@@ -8,24 +8,23 @@
 #import <Foundation/Foundation.h>
 #import "CBusDefines.h"
 
-@class CBusRealCall;
-@class CBusAsyncCall;
+@protocol CBusCall;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CBusDispatcher : NSObject
 
 /**
- * 执行一个同步调用
- * @param call 同步调用实体
+ * 开始执行一个调用
+ * @param call 同步或异步调用实体
  */
-- (void)executed:(CBusRealCall *)call;
+- (void)beginCall:(id<CBusCall>)call;
 
 /**
- * 执行一个异步调用
- * @param asyncCall 异步调用实体
+ * 结束一个调用，从内存中进行超时管理的字典中移除
+ * @param call 同步或异步调用的实例
  */
-- (void)enqueue:(CBusAsyncCall *)asyncCall;
+- (void)finishedCall:(id<CBusCall>)call;
 
 /**
  * 触发异步方法回调
@@ -33,18 +32,6 @@ NS_ASSUME_NONNULL_BEGIN
  * @param completion 结束回调
  */
 - (void)onResult:(CBus *)cbus completion:(CBusAsyncCallCompletion)completion;
-
-/**
- * 结束一个同步调用，从内存中进行超时管理的字典中移除
- * @param call 同步调用实体
- */
-- (void)finishedCall:(CBusRealCall *)call;
-
-/**
- * 结束一个异步调用，从内存中进行超时管理的字典中移除
- * @param asyncCall 异步调用实体
- */
-- (void)finishedAsyncCall:(CBusAsyncCall *)asyncCall;
 
 /// 取消所有的异步方法调用
 - (void)cancelAllCalls;

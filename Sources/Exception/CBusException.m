@@ -10,6 +10,8 @@
 
 /// CBusCode描述
 NSString *CBusDescriptionForCode(CBusCode code) {
+    if (code == CBusCodeSuccess) { return @"请求成功"; }
+    if (code == CBusCodeUnknown) { return @"未知错误"; }
     if (code == CBusCodeTimeout) { return @"请求超时"; }
     if (code == CBusCodeRequestNull) { return @"请求实体不能为空"; }
     if (code == CBusCodeAleadyExecuted) { return @"不能重复触发当前请求"; }

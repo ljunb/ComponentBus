@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param code 响应code
  * @return CBusResponse实例
  */
-+ (instancetype)error:(NSDictionary *)result code:(CBusCode)code;
++ (instancetype)error:(nullable NSDictionary *)result code:(CBusCode)code;
 
 
 @end

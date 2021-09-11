@@ -67,7 +67,7 @@
     } @finally {
         // invoke if current thread wake up
         [self done];
-        [_realCall.client.dispatcher finishedAsyncCall:self];
+        [_realCall.client.dispatcher finishedCall:self];
     }
 }
 

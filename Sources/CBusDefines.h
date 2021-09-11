@@ -30,6 +30,7 @@ typedef void(^CBusAsyncCallCompletion)(CBus * _Nonnull cbus);
 /// cbus code
 typedef NS_ENUM(NSUInteger, CBusCode) {
     CBusCodeUnknown = -1,
+    CBusCodeSuccess = 1,
     CBusCodeRequestNull = 10001,
     CBusCodeTimeout = 10002,
     CBusCodeAleadyExecuted = 10003,

@@ -1,35 +1,70 @@
-## CBus
-CBus 是一种组件化通信的方案，其具备以下特性：
-* 消除组件之间的依赖关系，以组件总线方式进行通信
-* 支持同步和异步两种调用方式
-* 支持自定义拦截器，实现AOP编程
-* 更多其他特性
+# 目录
+- [简介](#CBus简介)
+    - [核心功能](#核心功能)
+    - [优势](#优势)
+- [快速开始](#快速开始)
+    - [封装CBus组件](#封装CBus组件)
+    - [调用CBus组件](#调用CBus组件)
+- [CBusAPIs](#CBusAPIs)   
+    - [CBus](#CBus)
+    - [CBusComponent](#CBusComponent)
+- [TODO](#TODO)    
+
+## CBus简介
+- 一种组件化框架
+- 将某个模块对外方法使用CBus包装，那么就形成了一个CBus组件
+- CBus对外暴露组件名称以及各种组件方法
+- CBus封装了组件之间的底层数据通信逻辑，组件与组件之前没有接口依赖
+- 更多其他特性
+
+### 核心功能
+
+- 组件注册表
+    - main函数执行之前，所有组件自动注册到一个Map，形成组件注册表
+    - 后续组件调用，统一来注册表查找组件
+- 组件方法转发    
+    - 注册表中通过组件名称找到组件对象
+    - 在组件对象中查找对应的组件方法并调用之
+    - 框架层相当于模块与模块之间的胶水层，解除了模块接口依赖
+- 组件方法调度
+    - 允许调用方同步/异步方式调用其他组件方法
+    - 框架内部维护了一个NSOperationQueue，用于执行异步调用逻辑
+    - 不用关心其他组件方法是同步或者异步实现
+- 生命周期管理
+    - 在AppDelegate中进行生命周期方法绑定
+- 拦截器
+    - 允许开发者自定义拦截器，实现AOP编程
+    
+### 优势
+CBus消除了每个组件之间的依赖关系，可彻底解耦业务依赖。
 
 ## 快速开始
 ### 封装CBus组件
 快速封装一个业务组件：
 ```objc
-#import "HomeModule.h"
+#import "HomeComponent.h"
 #import <CBus/CBusComponent.h>
 #import <CBus/CBus.h>
 
-// 1、实现CBusComponent协议
-@interface HomeModule ()<CBusComponent>
+// 实现CBusComponent协议
+@interface HomeComponent ()<CBusComponent>
 @end
 
-@implementation HomeModule
+@implementation HomeComponent
 
-// 2、注册组件，设置组件名称为：home
+// 注册组件，设置组件名称为：home
 CBUS_COMPONENT(home)
 
-// 3、标记一个方法
+// 标记一个方法
 CBUS_ACTION(testAction) {
     CBusResponse *res = [CBusResponse success:@{@"status": @"success", @"message": @"this is a message from test action"}];
-    // 4、必须触发的方法，代表方法调用结束
+    // 返回调用结果
     [cbus finished:res];
 }
 ```
-### 组件调用
+以上示例通过 `CBUS_COMPONENT` 注册了一个 `home` 组件，同时用 `CBUS_ACTION` 标记了一个可供外部调用的组件方法。
+
+### 调用CBus组件
 同步调用：
 ```objc
 #import <CBus/CBus.h>
@@ -55,56 +90,126 @@ CBUS_ACTION(testAction) {
 }
 ```
 
-## 核心功能
-### 组件注册表
-CBus 维护着一个注册表，该注册表以 `componentName: componentInstance` 的格式存放着所有组件的对应关系。组件分为静态组件和动态组件，静态组件
-将会在 App 启动的时候进行注册和初始化；而动态组件在启动时只注册类型，业务方按需进行组件初始化。
+## CBusAPIs
+### CBus
+#### client
+`@property (nonatomic, strong, readonly) CBusClient *client;`
 
-在 CBus 中，可通过 `CBUS_COMPONENT(componentName)` 的方式来快速注册静态组件。如果 `componentName` 不为空，那么将会使用该值作为注册表中的 `key`，否则直接用
-组件类型的字符串代替。注意该 `key` 是组件的名称，也是组件之间通信的唯一标识。区别于静态组件，可用 `CBUS_DYNAMIC_COMPONENT(componentName)` 来注册一个
-动态组件，除了不会在启动时进行初始化，其他并无二异。
+CBus内部维护一个默认的 CBusClient 对象，如无设置，则返回该对象。
 
-### 组件方法转发
-借助于维护的注册表，CBus 可通过名称来匹配到对应的组件实例，为了能正确响应组件目标方法，框架提供了 `CBUS_ACTION(actionName)` 宏定义，来标记
-可用于组件通信的方法。该宏最终转换为以下方法定义：
+#### + setCBusClient:
+`+ (void)setCBusClient:(CBusClient *)client;`
+
+设置 CBusClient 对象。一般情况下，不需要设置，因为内部有默认的 CBusClient 对象。对于一些非常重要的业务或者组件，可以单独设置 CBusClient 对象，
+保证这些组件或者业务在发起组件调用的时候，能够使用单独的操作队列。
+
+#### request;
+`@property (nonatomic, strong, readonly) CBusRequest *request;`
+
+每次发起一个调用请求，都会新建 CBusRequest 对象，同时返回一个新的 CBus 对象。`request` 即是当前调用的请求实例。
+
+#### 发起CBusRequest
+CBus 提供了一系列创建 CBusRequest 的快捷方法：
+- 同步调用
+    - `+ (CBus *)callRequestWithComponent:action:params:`
+    - `+ (CBus *)callRequestWithComponent:action:`
+- 异步调用
+    - `+ (void)asyncCallRequestWithComponent:action:params:complete:`
+    - `+ (void)asyncCallRequestWithComponent:action:params:`
+    - `+ (void)asyncCallRequestWithComponent:action:`
+    - `+ (void)asyncCallRequestWithComponent:action:params:completeOnMainThread:`
+
+这些方法，实际内部都会生成一个 CBusRequest 对象，其实质是调用了 CBus 的另外两个方法：
+- `+ (CBus *)execute:(CBusRequest *)request;`
+- `+ (void)enqueue:(CBusRequest *)request complete:(CBusAsyncCallCompletion)complete;`
+
+#### response
+`@property (nonatomic, strong, readonly) CBusResponse *response;`
+
+当前调用的响应结果。
+
+#### - finished:;
+`- (void)finished:(CBusResponse *)response;`
+
+设置调用结果。前面看到，每个 `CBUS_ACTION` 标识的组件方法，需要给当前组件调用返回调用结果，那么通过该方法进行设置。
+假设组件方法为同步实现，那么在组件方法里面返回结果：
 ```objc
-- (void)__cbus_action__testAction:(CBus *)cbus {
-    ...
+CBUS_ACTION(syncAction) {
+    CBusResponse *res = [CBusResponse success:@{@"status": @"success", @"message": @"this is a message from test action"}];
+    // 返回调用结果
+    [cbus finished:res];
 }
 ```
-所以在标记的方法体内，可以访问到一个CBus实例 `cbus`，该 `cbus` 就是其他组件发起交互请求时生成的实例。必须要注意的一点时，在每次返回结果时，
-都需要手动进行设置 CBusResponse 对象：`[cbus finished:res]`，代表响应成功。
-
-### 组件方法调度
-CBus 支持以同步或是异步方式，去调用某个组件的方法：
-* 组件A同步调用B方法，不管该方法是同步亦或是异步，最终返回的 CBus 对象都位于组件A发起调用的线程内
-* 组件A异步调用B方法，则可以选择是否把响应回调切回主线程
-
-### 拦截器
-CBus 内部实现了拦截器，业务方也可以自定义拦截器，利用其AOP特性做一些处理。如要自定义拦截器，需要实现 CBusInterceptor 协议方法 `-intercept:`。注意在进行自定义处理后，
-必须要在该方法内调用 `[chain proceed]`：
+假设组件方法为异步实现，那么在异步回调里面返回结果：
 ```objc
-
-@interface MyInterceptor()<CBusInterceptor>
-@end
-
-@implementation MyInterceptor
-
-- (CBusResponse *)intercept:(id<CBusChain>)chain {
-    CBus *cbus = [chain cbus];
-    NSString *componentName = cbus.request.component;
-    
-    // do something...
-    
-    // 必须返回响应结果，交由下个拦截器去处理
-    return [chain proceed];
+CBUS_ACTION(asyncAction) {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [NSThread sleepForTimeInterval:3];
+        
+        CBusResponse *res = [CBusResponse success:@{@"status": @"success"}];
+        // 返回调用结果
+        [cbus finished:res];
+    });
 }
-
-@end
 ```
+> 不论组件实现是同步或者异步，都需要通过 `finised:` 来返回调用结果。
+
+#### @property (readonly) BOOL isFinished;
+当前调用是否已经结束。
+
+#### @property (readonly) BOOL isCanceled;
+当前调用是否已经取消。
+
+#### - cancel
+`- (void)cancel;`
+取消当前组件调用。
+
+### CBusComponent
+CBusComponent 是组件化协议，每个需要进行组件化的模块都需要实现该协议。
+#### CBUS_COMPONENT
+`CBUS_COMPONENT(name)`
+
+使用该宏进行静态组件的注册，其定义为：
+```objc
+#define CBUS_COMPONENT(name) \
+CBUS_EXTERN void CBusResigterComponent(Class); \
++ (NSString *)componentName { return @#name; } \
++ (void)load { CBusResigterComponent(self); }
+```
+因此 App 会在执行 `main` 函数之前，进行组件的注册。对于静态组件，注册的时候会新建一个空实例，并添加至注册表。如果业务方提供了 `name`，那么将作为组件
+的名称添加到注册表中，用于后续的组件调用。如果没有提供 `name`，组件类型将作为其注册表的 `key`。
+
+#### CBUS_DYNAMIC_COMPONENT
+`CBUS_DYNAMIC_COMPONENT(name)`
+使用该宏进行动态态组件的注册。相对于静态组件，动态组件的注册只会注册其类型，不会实例化空对象，后续业务方可在必要时机进行动态组件的注册。该宏定义：
+```objc
+#define CBUS_DYNAMIC_COMPONENT(name) \
+CBUS_COMPONENT(#name) \
++ (BOOL)isDynamic { return YES; } \
+```
+
+#### CBUS_ACTION
+`CBUS_ACTION(action)`
+
+CBus 为了能够正确识别匹配组件的目标方法，定义了该宏：
+```objc
+#define CBUS_ACTION(sel_name) \
+- (void)__cbus_action__##sel_name:(CBus *)cbus CBUS_OBJC_DYNAMIC
+```
+可以看到，该宏为每个标记的组件方法，添加了 `__cbus_action__` 的前缀，并传入了一个当前调用的 CBus 对象，业务方可通过访问 `cbus` 实例来
+获取调用请求，或是设置返回调用结果。
+
+#### + isDynamic
+`+ (BOOL)isDynamic;`
+
+是否动态组件。
+
+#### + componentName
+`+ (NSString *)componentName;`
+
+当前组件名称。
 
 ## TODO
-- [ ] 生命周期管理
 - [ ] 超时处理
 - [ ] 跨App通信
 

@@ -35,13 +35,13 @@
     NSLog(@"test start: %f", NSTimeIntervalSince1970);
     [CBus asyncCallRequestWithComponent:@"home" action:@"asyncAction" params:nil complete:^(CBus * _Nonnull cbus) {
         NSLog(@"test end %f", NSTimeIntervalSince1970);
-        NSLog(@"testAsyncAction: current thread %@", NSThread.currentThread);
+        NSLog(@"testAsyncAction: current thread %@, response: %@", NSThread.currentThread, cbus.response);
     }];
 }
 
 - (void)testAsyncCompleteOnMainThread {
-    [CBus asyncCallRequestWithComponent:@"home" action:@"asyncAction" params:nil completeOnMainThread:^(CBus * _Nonnull cbus) {
-        NSLog(@"testAsyncCompleteOnMainThread: current thread %@", NSThread.currentThread);
+    [CBus asyncCallRequestWithComponent:@"home1" action:@"asyncAction" params:nil completeOnMainThread:^(CBus * _Nonnull cbus) {
+        NSLog(@"testAsyncCompleteOnMainThread: current thread %@, response: %@", NSThread.currentThread, cbus.response);
     }];
 }
 

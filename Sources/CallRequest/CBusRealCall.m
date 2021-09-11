@@ -40,7 +40,7 @@
     
     @try {
         _isExecuted = YES;
-        [_client.dispatcher executed:self];
+        [_client.dispatcher beginCall:self];
         // 拿到结果后，需要更新到cbus
         CBusResponse *response = [self responseOnInterceptorChain];
         [_cbus finished:response];
@@ -63,7 +63,7 @@
     }
     
     CBusAsyncCall *asyncCall = [CBusAsyncCall asyncCallWithCBus:_cbus realCall:self completion:callback];
-    [_client.dispatcher enqueue:asyncCall];
+    [_client.dispatcher beginCall:asyncCall];
 }
 
 - (CBusRequest *)request {

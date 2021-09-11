@@ -36,6 +36,14 @@
     return self;
 }
 
+- (void)beginCall:(id<CBusCall>)call {
+    if ([call isKindOfClass:[CBusRealCall class]]) {
+        [self executed:(CBusRealCall *)call];
+    } else if ([call isKindOfClass:[CBusAsyncCall class]]) {
+        [self enqueue:(CBusAsyncCall *)call];
+    }
+}
+
 - (void)executed:(CBusRealCall *)call {
     CBus_LOCK(_lock);
     [_runningSyncCalls addObject:call];
@@ -43,20 +51,12 @@
 }
 
 - (void)enqueue:(CBusAsyncCall *)asyncCall {
-    CBusRequest *request = asyncCall.request;
+    // 加入队列
+    [_dispatchQueue addOperation:asyncCall];
     
-    id<CBusComponent> component = [CBusComponentRegister componentInstanceForName:request.component];
-    NSString *targetActionStr = [NSString stringWithFormat:@"__cbus_action__%@:", request.action];
-    SEL actionSel = NSSelectorFromString(targetActionStr);
-    
-    if ([component conformsToProtocol:@protocol(CBusComponent)] && [component respondsToSelector:actionSel]) {
-        // 加入队列
-        [_dispatchQueue addOperation:asyncCall];
-        
-        CBus_LOCK(_lock);
-        [_runningAsyncCalls addObject:asyncCall];
-        CBus_UNLOCK(_lock);
-    }
+    CBus_LOCK(_lock);
+    [_runningAsyncCalls addObject:asyncCall];
+    CBus_UNLOCK(_lock);
 }
 
 - (void)onResult:(CBus *)cbus completion:(CBusAsyncCallCompletion)completion {
@@ -73,8 +73,15 @@
     }
 }
 
+- (void)finishedCall:(id<CBusCall>)call {
+    if ([call isKindOfClass:[CBusRealCall class]]) {
+        [self finishedRealCall:(CBusRealCall *)call];
+    } else if ([call isKindOfClass:[CBusAsyncCall class]]) {
+        [self finishedAsyncCall:(CBusAsyncCall *)call];
+    }
+}
 
-- (void)finishedCall:(CBusRealCall *)call {
+- (void)finishedRealCall:(CBusRealCall *)call {
     // todo: 结束调用后，移除不再计算超时
     CBus_LOCK(_lock);
     [_runningSyncCalls removeObject:call];

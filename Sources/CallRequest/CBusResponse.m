@@ -14,7 +14,7 @@
 @synthesize success = _success;
 
 + (instancetype)success:(NSDictionary *)result {
-    return [[self alloc] initWithResult:result success:YES code:1];
+    return [[self alloc] initWithResult:result success:YES code:CBusCodeSuccess];
 }
 
 + (instancetype)error:(NSDictionary *)result {
@@ -22,12 +22,13 @@
 }
 
 + (instancetype)errorCode:(CBusCode)code {
-    NSDictionary *extInfo = @{@"CBusCodeDesc": CBusDescriptionForCode(code)};
-    return [self error:extInfo code:code];
+    return [self error:nil code:code];
 }
 
 + (instancetype)error:(NSDictionary *)result code:(CBusCode)code {
-    return [[self alloc] initWithResult:result success:NO code:code];
+    NSMutableDictionary *extInfo = [NSMutableDictionary dictionaryWithDictionary:@{@"CBusCodeDesc": CBusDescriptionForCode(code)}];
+    [extInfo addEntriesFromDictionary:result ?: @{}];
+    return [[self alloc] initWithResult:extInfo success:NO code:code];
 }
 
 - (instancetype)initWithResult:(NSDictionary *)result success:(BOOL)success code:(CBusCode)code {
