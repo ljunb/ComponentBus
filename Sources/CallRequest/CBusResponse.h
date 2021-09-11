@@ -16,14 +16,38 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) NSDictionary *result;
 /// 响应码
 @property (nonatomic, assign, readonly) CBusCode code;
+/// 是否响应成功
+@property (nonatomic, assign, readonly, getter=isSuccess) BOOL success;
 
-@property (nonatomic, assign, readonly) BOOL success;
+/**
+ * 快速返回一个成功CBusResponse实例
+ * @param result 响应结果
+ * @return CBusResponse实例
+ */
++ (instancetype)success:(NSDictionary *)result;
 
-+ (instancetype)success:(NSDictionary *)response;
+/**
+ * 快速返回一个失败CBusResponse实例
+ * @param code 失败code
+ * @return CBusResponse实例
+ */
++ (instancetype)errorCode:(CBusCode)code;
 
-+ (instancetype)failedCode:(CBusCode)code;
-+ (instancetype)failed:(NSDictionary *)response;
-+ (instancetype)failed:(NSDictionary *)response code:(CBusCode)code;
+/**
+ * 快速返回一个失败CBusResponse实例
+ * @param result 响应结果，其code将设置为CBusCodeUnknown
+ * @return CBusResponse实例
+ */
++ (instancetype)error:(NSDictionary *)result;
+
+/**
+ * 快速返回一个失败CBusResponse实例
+ * @param result 响应结果
+ * @param code 响应code
+ * @return CBusResponse实例
+ */
++ (instancetype)error:(NSDictionary *)result code:(CBusCode)code;
+
 
 @end
 

@@ -8,6 +8,7 @@
 #import "CBusComponentInterceptor.h"
 #import "CBus.h"
 #import "CBusComponent.h"
+#import "CBusComponentRegister.h"
 
 @implementation CBusComponentInterceptor
 
@@ -24,21 +25,21 @@
     CBus *cbus = [chain cbus];
     NSString *componentName = cbus.request.component;
     if (!componentName || componentName.length == 0) {
-        return [CBusResponse failedCode:CBusCodeComponentNameEmpty];
+        return [CBusResponse errorCode:CBusCodeComponentNameEmpty];
     }
     if (!cbus.request) {
-        return [CBusResponse failedCode:CBusCodeRequestNull];
+        return [CBusResponse errorCode:CBusCodeRequestNull];
     }
     
-    id<CBusComponent> component = CBusGetComponentInstanceForName(componentName);
+    id<CBusComponent> component = [CBusComponentRegister componentInstanceForName:componentName];
     if (!component) {
-        return [CBusResponse failed:@{@"componentName": componentName} code:CBusCodeComponentNotFound];
+        return [CBusResponse error:@{@"componentName": componentName} code:CBusCodeComponentNotFound];
     }
     
     NSString *targetActionStr = [NSString stringWithFormat:@"__cbus_action__%@:", cbus.request.action];
     SEL actionSel = NSSelectorFromString(targetActionStr);
     if (![component respondsToSelector:actionSel]) {
-        return [CBusResponse failed:@{@"action": targetActionStr} code:CBusCodeNotRecognizeSelector];
+        return [CBusResponse error:@{@"action": targetActionStr} code:CBusCodeNotRecognizeSelector];
     }
  
     @try {
@@ -48,7 +49,7 @@
         [component performSelector:actionSel withObject:cbus];
 #pragma clang diagnostic pop
     } @catch (NSException *exception) {
-        return [CBusResponse failed:@{@"exception": exception.userInfo}];
+        return [CBusResponse error:@{@"exception": exception.userInfo}];
     }
     
     return [chain proceed];

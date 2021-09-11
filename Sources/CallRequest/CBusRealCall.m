@@ -35,7 +35,7 @@
 
 - (CBusResponse *)execute {
     if (_isExecuted) {
-        return [CBusResponse failedCode:CBusCodeAleadyExecuted];
+        return [CBusResponse errorCode:CBusCodeAleadyExecuted];
     }
     
     @try {
@@ -48,7 +48,7 @@
     } @catch (NSException *exception) {
         // todo timeout
         NSLog(@"exception: %@", [exception userInfo]);
-        return [CBusResponse failed:exception.userInfo];
+        return [CBusResponse error:exception.userInfo];
     } @finally {
         [_client.dispatcher finishedCall:self];
     }
@@ -56,7 +56,7 @@
 
 - (void)enqueue:(CBusAsyncCallCompletion)callback {
     if (_isExecuted) {
-        CBusResponse *res = [CBusResponse failedCode:CBusCodeAleadyExecuted];
+        CBusResponse *res = [CBusResponse errorCode:CBusCodeAleadyExecuted];
         [_cbus finished:res];
         [_client.dispatcher onResult:_cbus completion:callback];
         return;

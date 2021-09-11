@@ -16,14 +16,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CBus : NSObject
 
-#pragma mark - class property
+#pragma mark - for class
 /// YES：开启debug模式；否则不开启
 @property (nonatomic, assign, class) BOOL isDebug;
 /// 是否开启log
 @property (nonatomic, assign, class) BOOL isEnableLog;
 
+/**
+ * 设置初始化环境
+ * @param isDebug 是否开启debug模式
+ * @param enableLog 开启日志
+ */
++ (void)configCBusInDebug:(BOOL)isDebug enableLog:(BOOL)enableLog;
 
-#pragma mark - instance property
+/**
+ * 自定义CBusClient对象
+ * @param client 自定义client实例
+ */
++ (void)setCBusClient:(CBusClient *)client;
+
+
+#pragma mark - for instance
 /// 每个cbus中绑定的client对象，其持有方法调用队列的管理者CBusDispatcher
 @property (nonatomic, strong, readonly) CBusClient *client;
 /// cbus的请求实体
@@ -35,6 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 是否取消
 @property (nonatomic, assign, readonly) BOOL isCanceled;
 
+#pragma mark init request
 /**
  * 快速发起一个同步CBusRequest
  *
@@ -74,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
                                params:(nullable NSDictionary *)params
                  completeOnMainThread:(nullable CBusAsyncCallCompletion)complete;
 
-
+#pragma mark handle request
 /**
  * 触发一个同步请求
  *
@@ -90,43 +104,17 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)enqueue:(CBusRequest *)request complete:(CBusAsyncCallCompletion)complete;
 
-
 /**
  * 设置一个响应结果，代表方法调用结束
  * @param response 响应结果实体
  */
 - (void)finished:(CBusResponse *)response;
 
+/// 取消当前调用
 - (void)cancel;
 
 /// 等待一个异步响应
 - (void)waitResponse;
-
-
-/**
- * 自定义CBusClient对象
- * @param client 自定义client实例
- */
-+ (void)setCBusClient:(CBusClient *)client;
-
-
-#pragma mark - Dynamic Component register
-/**
- * 注册一个动态组件
- *
- */
-+ (void)registerDynamicComponentForClass:(Class)componentClass;
-/**
- * 通过类型取消注册一个动态组件
- * @param componentClass 组件类型
- */
-+ (void)unregisterDynamicComponentForClass:(Class)componentClass;
-
-/**
- * 通过名称注册一个动态组件
- * @param componentName 组件名称
- */
-+ (void)unregisterDynamicComponentForName:(NSString *)componentName;
 
 @end
 

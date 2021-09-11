@@ -56,7 +56,7 @@
         CBusResponse *response = [_realCall responseOnInterceptorChain];
         // check if canceled
         if (_cbus.isCanceled || self.isCancelled) {
-            response = [CBusResponse failedCode:CBusCodeCanceled];
+            response = [CBusResponse errorCode:CBusCodeCanceled];
         }
         // call completion
         [_cbus finished:response];
@@ -65,6 +65,7 @@
         // todo: handle timeout
         NSLog(@"NSException %@", [exception userInfo]);
     } @finally {
+        // invoke if current thread wake up
         [self done];
         [_realCall.client.dispatcher finishedAsyncCall:self];
     }

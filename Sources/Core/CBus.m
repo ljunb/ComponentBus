@@ -10,7 +10,7 @@
 #import "CBusClient.h"
 #import "CBusRealCall.h"
 #import "CBusComponentRegister.h"
-
+#import "CBusComponent.h"
 
 /**
  * CBus将内置一个默认的CBusClient，管理着默认的CBusDispatcher
@@ -40,6 +40,31 @@ static BOOL _isEnableLog = NO;
 @synthesize isFinished = _isFinished;
 @synthesize isCanceled = _isCanceled;
 
+
+#pragma mark - CBus config
++ (void)configCBusInDebug:(BOOL)isDebug enableLog:(BOOL)enableLog {
+    [self setIsDebug:isDebug];
+    [self setIsEnableLog:enableLog];
+}
+
++ (BOOL)isDebug {
+    return _isDebug;
+}
+
++ (void)setIsDebug:(BOOL)isDebug {
+    _isDebug = isDebug;
+}
+
++ (BOOL)isEnableLog {
+    return _isEnableLog;
+}
+
++ (void)setIsEnableLog:(BOOL)isEnableLog {
+    _isEnableLog = isEnableLog;
+}
+
+
+#pragma mark - CBus instance handler
 + (instancetype)cbusWithRequest:(CBusRequest *)request {
     return [[self alloc] initWithRequest:request];
 }
@@ -107,20 +132,18 @@ static BOOL _isEnableLog = NO;
 - (void)finished:(CBusResponse *)response {
     // CBusResponse的设置可能位于不同线程，这里需要加锁
     [_waitingLock lock];
-    if (_isFinished) {
-        return;
+    
+    if (!_isFinished) {
+        _isFinished = YES;
+        _response = response;
+        
+        // 异步调用时，将会进入waiting状态，那么需要唤醒线程继续执行
+        if (_isWaiting) {
+            _isWaiting = false;
+            NSLog(@"wait response broadccast");
+            [_waitingLock broadcast];
+        }
     }
-    
-    _isFinished = YES;
-    _response = response;
-    
-    // 如果等待中的，那么直接唤醒线程继续执行
-    if (_isWaiting) {
-        _isWaiting = false;
-        NSLog(@"wait response broadccast");
-        [_waitingLock broadcast];
-    }
-    
     [_waitingLock unlock];
 }
 
@@ -131,6 +154,7 @@ static BOOL _isEnableLog = NO;
 }
 
 - (void)waitResponse {
+    // 异步调用，线程进入休眠
     [_waitingLock lock];
     if (!_isFinished) {
         @try {
@@ -142,38 +166,6 @@ static BOOL _isEnableLog = NO;
         }
     }
     [_waitingLock unlock];
-}
-
-
-#pragma mark - Dynamic Component register
-+ (void)registerDynamicComponentForClass:(Class)componentClass {
-    [CBusComponentRegister registerDynamicComponentForClass:componentClass];
-}
-
-+ (void)unregisterDynamicComponentForClass:(Class)componentClass {
-    [CBusComponentRegister unregisterDynamicComponentForClass:componentClass];
-}
-
-+ (void)unregisterDynamicComponentForName:(NSString *)componentName {
-    [CBusComponentRegister unregisterDynamicComponentForName:componentName];
-}
-
-
-#pragma mark - getter
-+ (BOOL)isDebug {
-    return _isDebug;
-}
-
-+ (void)setIsDebug:(BOOL)isDebug {
-    _isDebug = isDebug;
-}
-
-+ (BOOL)isEnableLog {
-    return _isEnableLog;
-}
-
-+ (void)setIsEnableLog:(BOOL)isEnableLog {
-    _isEnableLog = isEnableLog;
 }
 
 @end

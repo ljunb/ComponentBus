@@ -5,9 +5,10 @@
 //  Created by ljunb on 2021/9/4.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 #import <CBus/CBusComponent.h>
 
-@interface HomeModule : NSObject<CBusComponent>
+@interface HomeModule : NSObject<CBusComponent, UIApplicationDelegate>
 
 @end

@@ -13,21 +13,21 @@
 @synthesize result = _result;
 @synthesize success = _success;
 
-+ (instancetype)success:(NSDictionary *)response {
-    return [[self alloc] initWithResult:response success:YES code:1];
++ (instancetype)success:(NSDictionary *)result {
+    return [[self alloc] initWithResult:result success:YES code:1];
 }
 
-+ (instancetype)failedCode:(CBusCode)code {
++ (instancetype)error:(NSDictionary *)result {
+    return [self error:result code:CBusCodeUnknown];
+}
+
++ (instancetype)errorCode:(CBusCode)code {
     NSDictionary *extInfo = @{@"CBusCodeDesc": CBusDescriptionForCode(code)};
-    return [self failed:extInfo code:code];
+    return [self error:extInfo code:code];
 }
 
-+ (instancetype)failed:(NSDictionary *)response {
-    return [self failed:response code:CBusCodeUnknown];
-}
-
-+ (instancetype)failed:(NSDictionary *)response code:(CBusCode)code {
-    return [[self alloc] initWithResult:response success:NO code:code];
++ (instancetype)error:(NSDictionary *)result code:(CBusCode)code {
+    return [[self alloc] initWithResult:result success:NO code:code];
 }
 
 - (instancetype)initWithResult:(NSDictionary *)result success:(BOOL)success code:(CBusCode)code {

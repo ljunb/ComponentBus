@@ -7,7 +7,7 @@
 
 #import "CBusDispatcher.h"
 #import "CBus.h"
-#import "CbusComponent.h"
+#import "CBusComponentRegister.h"
 #import "CBusRealCall.h"
 #import "CBusAsyncCall.h"
 #import "CBusException.h"
@@ -44,11 +44,8 @@
 
 - (void)enqueue:(CBusAsyncCall *)asyncCall {
     CBusRequest *request = asyncCall.request;
-    if (!request) {
-        [CBusException boom:CBusCodeRequestNull];
-    }
     
-    id<CBusComponent> component = CBusGetComponentInstanceForName(request.component);
+    id<CBusComponent> component = [CBusComponentRegister componentInstanceForName:request.component];
     NSString *targetActionStr = [NSString stringWithFormat:@"__cbus_action__%@:", request.action];
     SEL actionSel = NSSelectorFromString(targetActionStr);
     

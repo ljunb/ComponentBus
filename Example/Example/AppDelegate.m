@@ -6,6 +6,9 @@
 //
 
 #import "AppDelegate.h"
+#import <CBus/CBus+LifeCycle.h>
+
+#define Safe(obj) obj ? obj : [NSNull null]
 
 @interface AppDelegate ()
 
@@ -16,6 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [CBus callAppDelegateActionForSelector:_cmd arguments:@[Safe(application), Safe(launchOptions)]];
     return YES;
 }
 

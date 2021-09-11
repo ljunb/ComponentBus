@@ -6,7 +6,6 @@
 //
 
 #import "CBusComponentRegister.h"
-#import "CBusComponent.h"
 #import "CBusException.h"
 
 
@@ -17,6 +16,15 @@ static NSMutableDictionary<NSString *, id<CBusComponent>> *CBusComponentMap;
 static NSMutableDictionary<NSString *, id<CBusComponent>> *CBusDynamicComponentMap;
 /// 组件注册队列
 static dispatch_queue_t CBusComponentSyncQueue;
+
+/// 获取组件类型注册表
+NSDictionary<NSString *, Class>* CBusGetComponentClassMap(void) {
+    __block NSDictionary<NSString *, Class> *result;
+    dispatch_sync(CBusComponentSyncQueue, ^{
+        result = [CBusComponentClassMap copy];
+    });
+    return result;
+}
 
 /// 获取静态组件注册表
 NSDictionary<NSString *, id<CBusComponent>>* CBusGetComponentMap(void) {
@@ -101,6 +109,31 @@ void CBusResigterComponent(Class cmpClass) {
 
 
 @implementation CBusComponentRegister
+
++ (NSDictionary<NSString *,Class> *)allComponentClassMap {
+    return CBusGetComponentClassMap();
+}
+
++ (NSArray<id<CBusComponent>> *)allComponents {
+    NSArray<id<CBusComponent>> *components = [[self componentMap] allValues];
+    NSArray<id<CBusComponent>> *dynamicComponents = [[self dynamicComponentMap] allValues];
+    NSMutableArray *result = [NSMutableArray array];
+    [result addObjectsFromArray:components];
+    [result addObjectsFromArray:dynamicComponents];
+    return [result copy];
+}
+
++ (NSDictionary<NSString *,id<CBusComponent>> *)componentMap {
+    return CBusGetComponentMap();
+}
+
++ (NSDictionary<NSString *,id<CBusComponent>> *)dynamicComponentMap {
+    return CBusGetDynamicComponentMap();
+}
+
++ (id<CBusComponent>)componentInstanceForName:(NSString *)componentName {
+    return CBusGetComponentInstanceForName(componentName);
+}
 
 + (void)registerDynamicComponentForClass:(Class)componentClass {
     if (![componentClass conformsToProtocol:@protocol(CBusComponent)]) {

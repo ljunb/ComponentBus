@@ -24,7 +24,7 @@ CBUS_ACTION(testAction) {
         res = [CBusResponse success:ext];
         [cbus finished:res];
     } else {
-        res = [CBusResponse failed:@{@"status": @"failed"}];
+        res = [CBusResponse error:@{@"status": @"failed"}];
         [cbus finished:res];
     }
 }
@@ -35,6 +35,11 @@ CBUS_ACTION(asyncAction) {
         CBusResponse *res = [CBusResponse success:@{@"status": @"success"}];
         [cbus finished:res];
     });
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    NSLog(@"HomeModule didFinishLaunchingWithOptions:%@", launchOptions);
+    return YES;
 }
 
 @end

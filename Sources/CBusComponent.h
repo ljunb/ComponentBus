@@ -16,14 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol CBusComponent <NSObject>
 
 /**
- * 根据组件名称获取对应的实例
- * @param cmpName 组件名称
- * @return 组件实例，静态组件or动态组件
- */
-CBUS_EXTERN id<CBusComponent> CBusGetComponentInstanceForName(NSString *cmpName);
-
-
-/**
  * 注册一个静态组件，会初始化空实例。
  * 如果提供了 `name`，那么将作为该组件的名称；否则将其Class字符串作为名称。
  */
