@@ -7,8 +7,14 @@
     - [调用CBus组件](#调用CBus组件)
 - [CBusAPIs](#CBusAPIs)   
     - [CBus](#CBus)
+    - [CBus(LifeCycle)](#CBus(LifeCycle))  
+    - [CBus(Register)](#CBus(Register))  
     - [CBusComponent](#CBusComponent)
-- [TODO](#TODO)    
+    - [CBusClient](#CBusClient)
+    - [CBusRequest](#CBusRequest)
+    - [CBusResponse](#CBusResponse)
+    - [CBusDispatcher](#CBusDispatcher)
+    - [CBusInterceptor](#CBusInterceptor)
 
 ## CBus简介
 - 一种组件化框架
@@ -103,7 +109,7 @@ CBus内部维护一个默认的 CBusClient 对象，如无设置，则返回该�
 设置 CBusClient 对象。一般情况下，不需要设置，因为内部有默认的 CBusClient 对象。对于一些非常重要的业务或者组件，可以单独设置 CBusClient 对象，
 保证这些组件或者业务在发起组件调用的时候，能够使用单独的操作队列。
 
-#### request;
+#### request
 `@property (nonatomic, strong, readonly) CBusRequest *request;`
 
 每次发起一个调用请求，都会新建 CBusRequest 对象，同时返回一个新的 CBus 对象。`request` 即是当前调用的请求实例。
@@ -111,13 +117,16 @@ CBus内部维护一个默认的 CBusClient 对象，如无设置，则返回该�
 #### 发起CBusRequest
 CBus 提供了一系列创建 CBusRequest 的快捷方法：
 - 同步调用
-    - `+ (CBus *)callRequestWithComponent:action:params:`
     - `+ (CBus *)callRequestWithComponent:action:`
+    - `+ (CBus *)callRequestWithComponent:action:params:`
+    - `+ (CBus *)callRequestWithComponent:action:params:timeout:`
 - 异步调用
-    - `+ (void)asyncCallRequestWithComponent:action:params:complete:`
-    - `+ (void)asyncCallRequestWithComponent:action:params:`
     - `+ (void)asyncCallRequestWithComponent:action:`
+    - `+ (void)asyncCallRequestWithComponent:action:params:`
+    - `+ (void)asyncCallRequestWithComponent:action:params:complete:`
+    - `+ (void)asyncCallRequestWithComponent:action:params:timeout:complete:`
     - `+ (void)asyncCallRequestWithComponent:action:params:completeOnMainThread:`
+    - `+ (void)asyncCallRequestWithComponent:action:params:timeout:completeOnMainThread:`
 
 这些方法，实际内部都会生成一个 CBusRequest 对象，其实质是调用了 CBus 的另外两个方法：
 - `+ (CBus *)execute:(CBusRequest *)request;`
@@ -128,7 +137,7 @@ CBus 提供了一系列创建 CBusRequest 的快捷方法：
 
 当前调用的响应结果。
 
-#### - finished:;
+#### - finished:
 `- (void)finished:(CBusResponse *)response;`
 
 设置调用结果。前面看到，每个 `CBUS_ACTION` 标识的组件方法，需要给当前组件调用返回调用结果，那么通过该方法进行设置。
@@ -163,6 +172,36 @@ CBUS_ACTION(asyncAction) {
 #### - cancel
 `- (void)cancel;`
 取消当前组件调用。
+
+### CBus(LifeCycle)
+组件与App生命周期方法绑定处理。
+#### + callAppDelegateActionForSelector:arguments:
+`+ (BOOL)callAppDelegateActionForSelector:(SEL)aSelector arguments:(NSArray *)arguments;`
+
+参考自 [Bifrost生命周期处理](https://github.com/youzan/Bifrost/blob/a1af5b0ecb5909d289a8e4641ccf3c8b23b175fe/Bifrost/Lib/Bifrost.m#L206) 。
+
+### CBus(Register)
+动态组件注册相关。
+#### + registerDynamicComponentForClass:
+`+ (void)registerDynamicComponentForClass:(Class)componentClass;`
+
+根据类型注册一个动态组件。
+
+#### + registerDynamicComponentForName:cls:
+`+ (void)registerDynamicComponentForName:(NSString *)componentName cls:(Class)componentClass;`
+
+给定名称和类型注册一个动态组件。
+
+#### + unregisterDynamicComponentForClass:
+`+ (void)unregisterDynamicComponentForClass:(Class)componentClass;`
+
+根据类型取消注册一个动态组件。
+
+#### + unregisterDynamicComponentForName:
+`+ (void)unregisterDynamicComponentForName:(NSString *)componentName;`
+
+根据名称取消注册一个动态组件。
+
 
 ### CBusComponent
 CBusComponent 是组件化协议，每个需要进行组件化的模块都需要实现该协议。
@@ -209,7 +248,130 @@ CBus 为了能够正确识别匹配组件的目标方法，定义了该宏：
 
 当前组件名称。
 
-## TODO
-- [ ] 超时处理
-- [ ] 跨App通信
+### CBusClient
+CBus 内核中持有一个默认的 CBusClient 对象，该对象是方法调用的实际管理者，其主要包含以下功能：
+* 初始化调用请求
+* 持有方法线程调度管理者
+* 设置全局的拦截器
 
+#### dispatcher
+`@property (nonatomic, strong, readonly) CBusDispatcher *dispatcher;`
+
+方法线程调度管理者，具体见 [CBusDispatcher](#CBusDispatcher) 。
+
+#### interceptors
+`@property (nonatomic, copy, readonly) NSArray<id<CBusInterceptor>> *interceptors;`
+
+自定义拦截器列表，全局生效。
+
+#### - newCall:
+`- (CBusRealCall *)newCall:(CBus *)cbus;`
+
+初始化一个调用请求。
+
+#### - addInterceptor:
+`- (void)addInterceptor:(id<CBusInterceptor>)interceptor;`
+
+添加一个拦截器。
+
+#### - addInterceptors:
+`- (void)addInterceptors:(NSArray<id<CBusInterceptor>> *)interceptors;`
+
+批量添加拦截器。
+
+### CBusRequest
+每次 CBus 的方法调用，都需要生成一个 CBusRequest 实例，该实例中包含了当前请求所有的信息。
+#### component
+`@property (nonatomic, copy, readonly) NSString *component;`
+
+目标组件名称。
+
+#### action
+`@property (nonatomic, copy, readonly) NSString *action;`
+
+目标组件方法名称。
+
+#### params
+`@property (nonatomic, strong, readonly) NSDictionary *params;`
+
+参数实体。
+
+#### timeout
+`@property (nonatomic, assign, readonly) NSTimeInterval timeout;`
+
+当前请求的超时时间。
+
+#### isDeliverOnMainThread
+`@property (nonatomic, assign, readonly) BOOL isDeliverOnMainThread;`
+
+是否在主线程结束回调。
+
+#### interceptors
+`@property (nonatomic, copy, readonly) NSArray<id<CBusInterceptor>> *interceptors;`
+
+当前请求的拦截器。
+
+#### 新建请求
+可通过以下两个方法，生成对应的请求实体：
+* `+ requestWithComponent:action:params:`
+* `+ requestWithComponent:action:params:timeout`;
+
+#### deliverOnMainThread
+`- (void)deliverOnMainThread;`
+
+结束回调切换回主线程。
+
+#### 添加拦截器
+可添加单个或多个拦截器：
+* `- (void)addInterceptor:(id<CBusInterceptor>)interceptor;`：添加一个请求拦截器
+* `- (void)addInterceptors:(NSArray<id<CBusInterceptor>> *)interceptors;`：批量添加请求拦截器
+
+#### 设置超时时间
+可直接通过 `aRequest.timeout = 4` 来手动设置超时时间。
+
+### CBusResponse
+CBusResponse 中包含了每个方法调用的响应结果。
+
+#### result
+`@property (nonatomic, strong, readonly) NSDictionary *result;`
+
+响应结果。
+
+#### code
+`@property (nonatomic, assign, readonly) CBusCode code;`
+
+响应码。
+
+#### success
+`@property (nonatomic, assign, readonly, getter=isSuccess) BOOL success;`
+
+是否响应成功。
+
+#### 生成响应结果
+根据不同场景，提供了以下方法用于快速生成不同响应结果：
+* `+ (instancetype)success:(NSDictionary *)result;`：快速返回一个成功结果，其 `code=1, isSuccess=YES`
+* `+ (instancetype)errorCode:(CBusCode)code;`：根据给定的 `code`，快速返回一个失败结果，其 `isSuccess=NO`
+* `+ (instancetype)error:(NSDictionary *)result;`：快速返回一个失败结果，其 `isSuccess=NO`
+* `+ (instancetype)error:(nullable NSDictionary *)result code:(CBusCode)code;`：快速返回一个自定义的失败结果，其 `isSuccess=NO`
+
+
+### CBusDispatcher
+CBus 所有的异步调用，都将加入到 CBusDispatcher 中维护的操作队列中，其默认的最大操作数是64。
+
+#### - enqueue:
+`- (void)enqueue:(CBusAsyncCall *)asyncCall;`
+
+开始执行一个异步调用。
+
+#### - onResult:completion:
+`- (void)onResult:(CBus *)cbus completion:(CBusAsyncCallCompletion)completion;`
+
+触发异步方法回调。
+
+#### - cancelAllCalls
+`- (void)cancelAllCalls;`
+
+取消所有的异步方法调用。
+
+### CBusInterceptor
+TODO

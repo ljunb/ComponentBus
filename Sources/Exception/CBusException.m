@@ -41,7 +41,7 @@ NSString *CBusDescriptionForCode(CBusCode code) {
     [userInfo setObject:@(code) forKey:@"CBusCode"];
     [userInfo setObject:CBusDescriptionForCode(code) forKey:@"CBusCodeDesc"];
     
-    NSString *reason = [exception reason] ?: [NSString stringWithFormat:@"CBusException: %lu", (unsigned long)code];
+    NSString *reason = [exception reason] ?: [NSString stringWithFormat:@"CBusException(%lu): %@", (unsigned long)code, CBusDescriptionForCode(code)];
     [userInfo addEntriesFromDictionary:[exception userInfo] ?: @{}];
     
     NSException *result = [NSException exceptionWithName:@"CBusException" reason:reason userInfo:userInfo];

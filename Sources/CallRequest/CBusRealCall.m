@@ -13,6 +13,8 @@
 #import "CBusInterceptorChain.h"
 #import "CBusComponentInterceptor.h"
 #import "CBusResponseInterceptor.h"
+#import "CbusTimeoutInterceptor.h"
+#import "CBusException.h"
 
 @implementation CBusRealCall
 
@@ -40,17 +42,9 @@
     
     @try {
         _isExecuted = YES;
-        [_client.dispatcher beginCall:self];
-        // 拿到结果后，需要更新到cbus
-        CBusResponse *response = [self responseOnInterceptorChain];
-        [_cbus finished:response];
-        return response;
+        return [self responseOnInterceptorChain];
     } @catch (NSException *exception) {
-        // todo timeout
-        NSLog(@"exception: %@", [exception userInfo]);
         return [CBusResponse error:exception.userInfo];
-    } @finally {
-        [_client.dispatcher finishedCall:self];
     }
 }
 
@@ -63,7 +57,7 @@
     }
     
     CBusAsyncCall *asyncCall = [CBusAsyncCall asyncCallWithCBus:_cbus realCall:self completion:callback];
-    [_client.dispatcher beginCall:asyncCall];
+    [_client.dispatcher enqueue:asyncCall];
 }
 
 - (CBusRequest *)request {
@@ -84,9 +78,12 @@
 
 - (CBusResponse *)responseOnInterceptorChain {
     NSMutableArray<id<CBusInterceptor>> *interceptors = [NSMutableArray array];
-    // custom interceptors
+    // custom request interceptors
+    [interceptors addObjectsFromArray:_cbus.request.interceptors];
+    // custom client interceptors
     [interceptors addObjectsFromArray:_client.interceptors];
     // cbus interceptors
+    [interceptors addObject:[CBusTimeoutInterceptor sharedInterceptor]];
     [interceptors addObject:[CBusComponentInterceptor sharedInterceptor]];
     [interceptors addObject:[CBusResponseInterceptor sharedInterceptor]];
     

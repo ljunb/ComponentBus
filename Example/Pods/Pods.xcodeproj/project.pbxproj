@@ -7,68 +7,70 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A23DF8DC4530CF899FC33A2E542425F /* CBusDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 485D1AFA86DABF0FA8DED8DC3EBB2543 /* CBusDispatcher.m */; };
+		00BC64662594317E90C6F5C17F6F0742 /* CBus+LifeCycle.h in Headers */ = {isa = PBXBuildFile; fileRef = 39CF20F223EE01B61CF7C7EF8EED4263 /* CBus+LifeCycle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		021C1180730D7AF9517CDCA4CE98C4F9 /* CBusComponentInterceptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 60C4B4BD94103D8A3ACE77161CB8803F /* CBusComponentInterceptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1449B309996C863176E27AD546B43158 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		18F47F8CDE20F264D7F6EC4626F73357 /* CBusRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C04D0B0CBC822094B5EA5BF953E6CACA /* CBusRequest.m */; };
+		19B5EC50CBC8753CF5FA0E5228DD13E3 /* CBusResponseInterceptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D27F9B63E66B7DCEF1FA6502B5B4627 /* CBusResponseInterceptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1BB54702066296438F43B641C5908EF3 /* CBusInterceptorChain.m in Sources */ = {isa = PBXBuildFile; fileRef = E83D539690899E354C42E78317F4A1F1 /* CBusInterceptorChain.m */; };
 		1EC6AD06459D8C77FEBEB14E83C56BC0 /* Pods-Example-HomeModule-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9E4D47C7758D1CCEEB0847B3F01A01 /* Pods-Example-HomeModule-dummy.m */; };
-		34BDE24D2C2899AE5D56DC3AC13FEE92 /* CBusInterceptorChain.h in Headers */ = {isa = PBXBuildFile; fileRef = 2AAD749638F3E1C0009C1C053A7C27E1 /* CBusInterceptorChain.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		36CC2FA7DCCE3E03CDA7C9156C93C471 /* CBus+LifeCycle.m in Sources */ = {isa = PBXBuildFile; fileRef = F977493CC55024B72ED465CEF4471D0E /* CBus+LifeCycle.m */; };
-		399FD2F3AD1A5BFEA179B7645E31AF10 /* CBus.h in Headers */ = {isa = PBXBuildFile; fileRef = 8443E36C18552BAEDA4266039CE52E24 /* CBus.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2287AD986AE143132AFBFF19A6696B4A /* CBusResponseInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0B93392018203B48843DD19894E539 /* CBusResponseInterceptor.m */; };
+		254ED7BE778E96BA04C208DE5F62EB1C /* CBusDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = C35191CCBA80AFE3EBD5607FCC861127 /* CBusDispatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2F737051C652FEFE6CED40C370875E3C /* CBusException.h in Headers */ = {isa = PBXBuildFile; fileRef = 77649C8A39980D63BECCDDBAFE04BC49 /* CBusException.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		327C54656405000EBDDBE3601F8D60D3 /* CBusAsyncCall.m in Sources */ = {isa = PBXBuildFile; fileRef = DCBCC7BD53D25E94416DB12CF950CE71 /* CBusAsyncCall.m */; };
+		358D0CFEDFBB01BC19001D6A78F03D05 /* CBus-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A2B4586347A38A0EFA13C6A871D1CE87 /* CBus-dummy.m */; };
+		378B917D9577DF14D7BEFC75E541F924 /* CBus+LifeCycle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1A1E9BF4CD136E8AB5A9D35E824D02 /* CBus+LifeCycle.m */; };
 		423F0823C5473AB6A5350DDC51C4C4D3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		4C2376F08C32DB00F1BD8E4E968DE692 /* CBusInterceptorChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04838BB7B7894D044DA5B003FA030D00 /* CBusInterceptorChain.m */; };
+		4C8F9F18F509AF6F994058143ADAC436 /* CBusException.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A4343E4AB88DCFA5CFC48D0D8721BD4 /* CBusException.m */; };
 		4F27E7843B032CAF69EF3CB7F8092B34 /* Pods-Example-UserModule-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6F81229E075F7775C80AC2F75166FE /* Pods-Example-UserModule-dummy.m */; };
-		509BB689BCEF8B0B8DBAE43DC970FA90 /* CBus+LifeCycle.h in Headers */ = {isa = PBXBuildFile; fileRef = 33BCF2DBAC0EDDB99F3BFB022D533129 /* CBus+LifeCycle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		51DAAB10B0104106B2DCF59FF860827C /* CBusException.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FAD07643829FF6E372BBBD4B4134C3 /* CBusException.m */; };
-		59BDF648ED96DDE970EC48B411E31A21 /* CBusRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A5093564EACF26FD20B1BB89398DA1EF /* CBusRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5AA4376B3F925DF0B67FBF0D10EA9145 /* CBusDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D44953EB6A91317C0C3CC35FBE2E461 /* CBusDispatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5F7B1CCB7EC9F656A650A75F1234898D /* CBusComponentInterceptor.h in Headers */ = {isa = PBXBuildFile; fileRef = CDD1B1087D8E2ACAFF4D52D583115F90 /* CBusComponentInterceptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6362B1B066E2DBC36957D9F489569258 /* CBusClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 00AC65BE424C482CDF99097AF8B2E557 /* CBusClient.m */; };
-		6CA0F50709C1FD9F692EEE3C55D72BAF /* CBusResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 42664E8F8C102DAD350B2D682C2DCEFE /* CBusResponse.m */; };
-		70E647F909FF766A933F77F91C35DC61 /* CBus-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2A5233501EEE1D03F0CDC73AA9707C /* CBus-dummy.m */; };
-		713DCAC2BA8A29BB8FB9C5C4F950560C /* CBusRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 126606E6C7C2E6362DDF4513E06F7E37 /* CBusRequest.m */; };
-		7615C8BA042E3F97FA21CF0251E046F9 /* CBusComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C92E1D2B24CFCE24B84FB57BA2CD5C9 /* CBusComponent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		651437D7C2D601FC1C7F51D46C3EE3A6 /* CBusDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A87B50B7A43835F9164BDD12F35599E /* CBusDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		67614CAE20781E38D107F3119E50AAE7 /* CBusComponentRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = 4427CFA16A5130D7FAF3491F4CD43C52 /* CBusComponentRegister.m */; };
+		78F9408C27BA64F048D86D921522345E /* CBus+Register.h in Headers */ = {isa = PBXBuildFile; fileRef = D95E9A220598B83DF1C6AC86BC9E0C3E /* CBus+Register.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		79143C29CD2C73E61F6C1E813639E158 /* CBusComponentRegister.h in Headers */ = {isa = PBXBuildFile; fileRef = 52AA4955F5555BCD77EB008ED03BE753 /* CBusComponentRegister.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		799EF90871540645BD5DD3308CB29BC1 /* Pods-Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D3101BF515326E631715EE1A144FCF5B /* Pods-Example-dummy.m */; };
-		7E5F4C130975F842EED87B1F28E1F0CE /* CBusComponentRegister.h in Headers */ = {isa = PBXBuildFile; fileRef = 879888F1D2D5C66F4B478FD45C856D8F /* CBusComponentRegister.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8C7DC67C7F3C576A6148CE3D89F72A60 /* CBusAsyncCall.m in Sources */ = {isa = PBXBuildFile; fileRef = A867F8AAB957A2854CF95457089AA57E /* CBusAsyncCall.m */; };
-		8E8FDC52888245467502E9945F0CB4D7 /* CBus.m in Sources */ = {isa = PBXBuildFile; fileRef = C3E30955B305E47BC30126DCC915E826 /* CBus.m */; };
+		7E99E5D9D36A27EF1B2C59D51E59DCD6 /* CBusResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 73D5826D1450F2B02EAB38EE6812184A /* CBusResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		81C469B92152D3FD3D757E34679C3B92 /* CBusTimeoutInterceptor.h in Headers */ = {isa = PBXBuildFile; fileRef = EB0F99DD1FFDD6CC8014636EAE40673B /* CBusTimeoutInterceptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		89DFF84718C988C042466E1488D97BDE /* CBus.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C2A22A9C5E996B3AA0ECCB806A5F77 /* CBus.m */; };
+		8ABE225A061D45BA44F345F95170BB19 /* CBusInterceptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 08500D629149ACEC59C8EE1AF07C7F30 /* CBusInterceptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		900788334161B90A21FCF521D1B2ADB8 /* CBusDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = F739352B9FE5022D5C2021539ADA5514 /* CBusDispatcher.m */; };
+		946790DC5AD71A9116224A220FD89E71 /* CBusClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 22C5A8E1E76465110AB9465B8CAFC2DB /* CBusClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9509C880B19845085913B4AC0BFDDFD6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		98DFFE8F97F8E3146AF716EAACCEC238 /* CBusException.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1D8E78000981A52333073C16A1D2F3 /* CBusException.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A60623383D07AD9A489ECCBFB01DC570 /* CBusCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 961950510AEC8134E8B44280A97035CE /* CBusCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A4E236BA03AC50E9F4522F408AA14BE4 /* CBusCall.h in Headers */ = {isa = PBXBuildFile; fileRef = BD61FF9F1B6031C55EEDE5F3A855B150 /* CBusCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A5A679D43E3089CF0A979C1733B9C485 /* CBusTimeoutInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = AF89BBF927446CB04DC79ECA9F2A8F80 /* CBusTimeoutInterceptor.m */; };
 		A6CA23D70151A78E5FF155EFEC2B70F1 /* Pods-Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C75478BD4E9563A859C3968CAB25298 /* Pods-Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B57F867D6FB58081313149706AC2B194 /* CBusResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 65659A60EE04E8CD3D25BD4D26D2122D /* CBusResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B83115FF6B2BB0014A356BA0B6E5E996 /* CBus+Register.m in Sources */ = {isa = PBXBuildFile; fileRef = 1751069B12A0B313A547F62467D728A4 /* CBus+Register.m */; };
-		C3F329CA7DE1AA21B659266A2193A337 /* CBusDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = CF5447023164C79E172EC4CCF4FADB1D /* CBusDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CD456F5C33291474B86F393338A59C2B /* CBusClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 234D4CEB431F236BEF5AEB5C6570D2A9 /* CBusClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CECB7036001A07F82F8B96D796B6A72B /* CBusInterceptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 74F0E8AC4A9B7C6931623284A8F33CBF /* CBusInterceptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D7F8B2C9DE9528DEBAF86192B4A8559A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		DB838DF5EDCD36EE15773A32DA1D6F8E /* CBusComponentRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = FF6235012B5057010D613D4F7096270F /* CBusComponentRegister.m */; };
-		DCDB6A95F91F9705C5F14D0F9695B2A3 /* CBus-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D41D11738301B80DF704F9F0E1DFAE65 /* CBus-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6E46FDE340E1F32E1E32FDE1767AB6F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		BBD38304C2AA434AED7C2918C8D13525 /* CBusClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 46299D4F910AD16519204F39511FCF27 /* CBusClient.m */; };
+		C7DC0E5783E9B5EDEC5316AE5C7A1A89 /* CBusInterceptorChain.h in Headers */ = {isa = PBXBuildFile; fileRef = 77BEF31A58F2F12219D6423FC75C3AB6 /* CBusInterceptorChain.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D11DE4AA340031CF302AAA15DE1A0C22 /* CBusRealCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C0E8D6164EF2B8E38779D644D616B1F /* CBusRealCall.m */; };
+		D29C726B77E1FCE5C0B56C875D4583F0 /* CBus+Register.m in Sources */ = {isa = PBXBuildFile; fileRef = A2270E65CDC2729670594FE23C86F70C /* CBus+Register.m */; };
+		D4A3F414F4B02E0A9D0339A2A2A95CE8 /* CBus.h in Headers */ = {isa = PBXBuildFile; fileRef = F5AF8A2EA5545B42686F8F2BA18790DA /* CBus.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DEF98488D9DADB40BC0D43329406D7E8 /* Pods-Example-HomeModule-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A808465F6F8C0C3E9BF2ECE44CCFB97 /* Pods-Example-HomeModule-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DFAB0B3A5032C3C61E740DA4221E58AA /* CBusRealCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2C2026EAED2F38BBC575F259B067D8 /* CBusRealCall.m */; };
+		E3A7DB0224DD52FD35C4B5DE7F792D34 /* CBus-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C121A301EEEB06F6561E6A42016F032 /* CBus-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E5BE9C5A85F3A6C0083B4206ACA215E1 /* Pods-Example-UserModule-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2297E8E7DA5530ACB600AFFA943371D9 /* Pods-Example-UserModule-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EA789C5BD80E87D9A89036A409B5CE39 /* CBus+Register.h in Headers */ = {isa = PBXBuildFile; fileRef = D60C8ED0A42B95A71108B66070E99C50 /* CBus+Register.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F47612CFD4C4C7752095B71BB0F599F8 /* CBusRealCall.h in Headers */ = {isa = PBXBuildFile; fileRef = FFC073B01B7D162D6E9A6E626969EB8F /* CBusRealCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F7E13C36BCB15E0AD2CE746E2569F29B /* CBusResponseInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F3639896B38EC0D8C921EDE867BFA2 /* CBusResponseInterceptor.m */; };
-		FA30ADB179E89550FFE7009477E3CD16 /* CBusResponseInterceptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A61DDA66CB78EFA4FE021BA89AEB8AE /* CBusResponseInterceptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FB06C3587A03957231C1DEF48ACB0666 /* CBusAsyncCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D7AA4BC01A91E419A21D14EA238E9E0 /* CBusAsyncCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FF00E3BB1A7E54EABEB3CC8D25678852 /* CBusComponentInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 86186A30155EE6FF47653335506993FE /* CBusComponentInterceptor.m */; };
+		F0BCBB9BA82E39DA847368FAABFE29C8 /* CBusResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D5779FCA1DCCB13B38683171CC3E94 /* CBusResponse.m */; };
+		F661540F4E2F7F9FAEF9D7AC8794132C /* CBusRealCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 356F66C8B9F623A3293E446265ECCAA3 /* CBusRealCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FAC8F9B003315A93B397588C8A095ADB /* CBusAsyncCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 4301328B3FF4FD37A3AE4CD3023EF761 /* CBusAsyncCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FC0FF43CCD26DB96E1BAD7AC2416BBE5 /* CBusComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 996CB96C5FABB2D2EF369C5DDF5C155A /* CBusComponent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FD79FD1B5DFBD1E4B51A9FFDF11AAA28 /* CBusRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = B10B3A0C5FC9F5F2DAE7A69108142CBF /* CBusRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FE93F1A48CFBFC04A9BDE8EDFE4ED6C6 /* CBusComponentInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6B94E1690A767130D0176E0B011BDD /* CBusComponentInterceptor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		472D2A66F86307E68CFF0CBECD21428A /* PBXContainerItemProxy */ = {
+		20CB7C6FF4D95309F2AF3A98B0213437 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = AF7B38BF7176935A305F39BA6495CAC8;
 			remoteInfo = CBus;
 		};
-		7570B85635CBBED8E7BD750A9265C1E4 /* PBXContainerItemProxy */ = {
+		C5360B0770C915D4E52C57995DEE4E34 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = AF7B38BF7176935A305F39BA6495CAC8;
 			remoteInfo = CBus;
 		};
-		D784EDEF911B37C606BE855ACBA91527 /* PBXContainerItemProxy */ = {
+		CDC02B25F8730304F5A10A978092FDF5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -78,78 +80,80 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00AC65BE424C482CDF99097AF8B2E557 /* CBusClient.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CBusClient.m; sourceTree = "<group>"; };
-		033462D5230E8DF85119F6FBBB4CA99F /* CBus.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = CBus.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		04838BB7B7894D044DA5B003FA030D00 /* CBusInterceptorChain.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CBusInterceptorChain.m; sourceTree = "<group>"; };
-		0A61DDA66CB78EFA4FE021BA89AEB8AE /* CBusResponseInterceptor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusResponseInterceptor.h; sourceTree = "<group>"; };
+		08500D629149ACEC59C8EE1AF07C7F30 /* CBusInterceptor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusInterceptor.h; sourceTree = "<group>"; };
 		0C75478BD4E9563A859C3968CAB25298 /* Pods-Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Example-umbrella.h"; sourceTree = "<group>"; };
 		0CB49451D9C9E6E0CD725E5B9D2A645D /* Pods-Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Example.modulemap"; sourceTree = "<group>"; };
-		10F3639896B38EC0D8C921EDE867BFA2 /* CBusResponseInterceptor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CBusResponseInterceptor.m; sourceTree = "<group>"; };
-		126606E6C7C2E6362DDF4513E06F7E37 /* CBusRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CBusRequest.m; sourceTree = "<group>"; };
-		1751069B12A0B313A547F62467D728A4 /* CBus+Register.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CBus+Register.m"; sourceTree = "<group>"; };
 		17C60050CC83DE911A9E375E1F37C6C1 /* Pods-Example-HomeModule.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Example-HomeModule.modulemap"; sourceTree = "<group>"; };
-		18FAD07643829FF6E372BBBD4B4134C3 /* CBusException.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CBusException.m; sourceTree = "<group>"; };
 		1C6F81229E075F7775C80AC2F75166FE /* Pods-Example-UserModule-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Example-UserModule-dummy.m"; sourceTree = "<group>"; };
-		1D7AA4BC01A91E419A21D14EA238E9E0 /* CBusAsyncCall.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusAsyncCall.h; sourceTree = "<group>"; };
 		1F667CC0E19EAF34E5A4119E2121F585 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Example.framework; path = "Pods-Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2089C1550CA9506B0B286B584DC7DC4C /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
 		2297E8E7DA5530ACB600AFFA943371D9 /* Pods-Example-UserModule-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Example-UserModule-umbrella.h"; sourceTree = "<group>"; };
-		234D4CEB431F236BEF5AEB5C6570D2A9 /* CBusClient.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusClient.h; sourceTree = "<group>"; };
+		22C5A8E1E76465110AB9465B8CAFC2DB /* CBusClient.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusClient.h; sourceTree = "<group>"; };
+		2A4343E4AB88DCFA5CFC48D0D8721BD4 /* CBusException.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CBusException.m; sourceTree = "<group>"; };
 		2A808465F6F8C0C3E9BF2ECE44CCFB97 /* Pods-Example-HomeModule-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Example-HomeModule-umbrella.h"; sourceTree = "<group>"; };
-		2AAD749638F3E1C0009C1C053A7C27E1 /* CBusInterceptorChain.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusInterceptorChain.h; sourceTree = "<group>"; };
 		2B6FEB4697483EF68C6346AD16F74BBD /* Pods-Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		2C92E1D2B24CFCE24B84FB57BA2CD5C9 /* CBusComponent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBusComponent.h; path = Sources/CBusComponent.h; sourceTree = "<group>"; };
-		33BCF2DBAC0EDDB99F3BFB022D533129 /* CBus+LifeCycle.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CBus+LifeCycle.h"; sourceTree = "<group>"; };
+		356F66C8B9F623A3293E446265ECCAA3 /* CBusRealCall.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusRealCall.h; sourceTree = "<group>"; };
+		39CF20F223EE01B61CF7C7EF8EED4263 /* CBus+LifeCycle.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CBus+LifeCycle.h"; sourceTree = "<group>"; };
+		3B1A1E9BF4CD136E8AB5A9D35E824D02 /* CBus+LifeCycle.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CBus+LifeCycle.m"; sourceTree = "<group>"; };
+		3D27F9B63E66B7DCEF1FA6502B5B4627 /* CBusResponseInterceptor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusResponseInterceptor.h; sourceTree = "<group>"; };
 		3FB64B3BB2B7F97FC8B0AF77B0D323C2 /* Pods_Example_HomeModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Example_HomeModule.framework; path = "Pods-Example-HomeModule.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		42664E8F8C102DAD350B2D682C2DCEFE /* CBusResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CBusResponse.m; sourceTree = "<group>"; };
-		485D1AFA86DABF0FA8DED8DC3EBB2543 /* CBusDispatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CBusDispatcher.m; sourceTree = "<group>"; };
-		4D44953EB6A91317C0C3CC35FBE2E461 /* CBusDispatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusDispatcher.h; sourceTree = "<group>"; };
-		4F1D8E78000981A52333073C16A1D2F3 /* CBusException.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusException.h; sourceTree = "<group>"; };
+		3FC6F10E9D0D450449826A0FD248B73D /* CBus.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = CBus.modulemap; sourceTree = "<group>"; };
+		4301328B3FF4FD37A3AE4CD3023EF761 /* CBusAsyncCall.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusAsyncCall.h; sourceTree = "<group>"; };
+		4427CFA16A5130D7FAF3491F4CD43C52 /* CBusComponentRegister.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CBusComponentRegister.m; sourceTree = "<group>"; };
+		46299D4F910AD16519204F39511FCF27 /* CBusClient.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CBusClient.m; sourceTree = "<group>"; };
+		49239EC799E74C95D3AA90C1E270D5AD /* CBus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CBus.release.xcconfig; sourceTree = "<group>"; };
+		52AA4955F5555BCD77EB008ED03BE753 /* CBusComponentRegister.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusComponentRegister.h; sourceTree = "<group>"; };
 		5A11B6FA5C14A50CC8C71956B68D21F1 /* Pods-Example-HomeModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example-HomeModule.release.xcconfig"; sourceTree = "<group>"; };
+		5A6B94E1690A767130D0176E0B011BDD /* CBusComponentInterceptor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CBusComponentInterceptor.m; sourceTree = "<group>"; };
 		6076AF12EFB56DB9C74920EF44F5A112 /* Pods_Example_UserModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Example_UserModule.framework; path = "Pods-Example-UserModule.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		60C4B4BD94103D8A3ACE77161CB8803F /* CBusComponentInterceptor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusComponentInterceptor.h; sourceTree = "<group>"; };
 		619333E6CCF5132A8895238D3EF84317 /* CBus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = CBus.framework; path = CBus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		63C0862315C5B20904925E8B321A1F11 /* CBus-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "CBus-Info.plist"; sourceTree = "<group>"; };
 		64B828F151DEA6F1635EF612A3F6AA47 /* Pods-Example-UserModule-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Example-UserModule-acknowledgements.markdown"; sourceTree = "<group>"; };
-		65659A60EE04E8CD3D25BD4D26D2122D /* CBusResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusResponse.h; sourceTree = "<group>"; };
 		6630F33C45C96CF4AA40B8808BD364D4 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
-		674E8D98369FB98B586CDAF47BE61091 /* CBus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CBus.debug.xcconfig; sourceTree = "<group>"; };
+		687F2A252777B46870078A3DAEB663E1 /* CBus.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = CBus.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		6D4986FC0487C69E234BA2B291A7FC38 /* Pods-Example-HomeModule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example-HomeModule.debug.xcconfig"; sourceTree = "<group>"; };
 		706E0E7BA14753F56C8E1B135A21587E /* Pods-Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Example-frameworks.sh"; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		74F0E8AC4A9B7C6931623284A8F33CBF /* CBusInterceptor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusInterceptor.h; sourceTree = "<group>"; };
+		73D5826D1450F2B02EAB38EE6812184A /* CBusResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusResponse.h; sourceTree = "<group>"; };
+		77649C8A39980D63BECCDDBAFE04BC49 /* CBusException.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusException.h; sourceTree = "<group>"; };
+		77BEF31A58F2F12219D6423FC75C3AB6 /* CBusInterceptorChain.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusInterceptorChain.h; sourceTree = "<group>"; };
 		7A7866C8B7EE8B167ED7446682D439C6 /* Pods-Example-HomeModule-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Example-HomeModule-Info.plist"; sourceTree = "<group>"; };
+		7C0E8D6164EF2B8E38779D644D616B1F /* CBusRealCall.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CBusRealCall.m; sourceTree = "<group>"; };
+		7C121A301EEEB06F6561E6A42016F032 /* CBus-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CBus-umbrella.h"; sourceTree = "<group>"; };
 		7D824BC0DEE8D08E2603750FB3EE9D93 /* Pods-Example-UserModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example-UserModule.release.xcconfig"; sourceTree = "<group>"; };
-		8443E36C18552BAEDA4266039CE52E24 /* CBus.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBus.h; sourceTree = "<group>"; };
-		86186A30155EE6FF47653335506993FE /* CBusComponentInterceptor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CBusComponentInterceptor.m; sourceTree = "<group>"; };
-		86349358EC88F315DEB52245C1B5682E /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
-		879888F1D2D5C66F4B478FD45C856D8F /* CBusComponentRegister.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusComponentRegister.h; sourceTree = "<group>"; };
-		961950510AEC8134E8B44280A97035CE /* CBusCall.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusCall.h; sourceTree = "<group>"; };
-		9A2C2026EAED2F38BBC575F259B067D8 /* CBusRealCall.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CBusRealCall.m; sourceTree = "<group>"; };
+		8A87B50B7A43835F9164BDD12F35599E /* CBusDefines.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBusDefines.h; path = Sources/CBusDefines.h; sourceTree = "<group>"; };
+		996CB96C5FABB2D2EF369C5DDF5C155A /* CBusComponent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBusComponent.h; path = Sources/CBusComponent.h; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9E9E4D47C7758D1CCEEB0847B3F01A01 /* Pods-Example-HomeModule-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Example-HomeModule-dummy.m"; sourceTree = "<group>"; };
 		9F364FD2B841A2C6964EC8AD11FDFD2C /* Pods-Example-UserModule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example-UserModule.debug.xcconfig"; sourceTree = "<group>"; };
-		A5093564EACF26FD20B1BB89398DA1EF /* CBusRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusRequest.h; sourceTree = "<group>"; };
-		A867F8AAB957A2854CF95457089AA57E /* CBusAsyncCall.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CBusAsyncCall.m; sourceTree = "<group>"; };
-		A9F4E299592B544A23EA3F448907DD6F /* CBus.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = CBus.modulemap; sourceTree = "<group>"; };
-		AA2A5233501EEE1D03F0CDC73AA9707C /* CBus-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CBus-dummy.m"; sourceTree = "<group>"; };
+		A2270E65CDC2729670594FE23C86F70C /* CBus+Register.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CBus+Register.m"; sourceTree = "<group>"; };
+		A2B4586347A38A0EFA13C6A871D1CE87 /* CBus-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CBus-dummy.m"; sourceTree = "<group>"; };
+		AF89BBF927446CB04DC79ECA9F2A8F80 /* CBusTimeoutInterceptor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CBusTimeoutInterceptor.m; sourceTree = "<group>"; };
+		B10B3A0C5FC9F5F2DAE7A69108142CBF /* CBusRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusRequest.h; sourceTree = "<group>"; };
 		B2196F5918D9FD8AEC3C7CAD9E58C6DA /* Pods-Example-UserModule-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Example-UserModule-acknowledgements.plist"; sourceTree = "<group>"; };
-		B6D140FB9307A5402C74EFE6A156A9FE /* CBus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CBus.release.xcconfig; sourceTree = "<group>"; };
+		BD61FF9F1B6031C55EEDE5F3A855B150 /* CBusCall.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusCall.h; sourceTree = "<group>"; };
+		BED408C2A35E424F94CB17F0618A024E /* CBus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CBus.debug.xcconfig; sourceTree = "<group>"; };
+		C04D0B0CBC822094B5EA5BF953E6CACA /* CBusRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CBusRequest.m; sourceTree = "<group>"; };
 		C0D0CB94FA0FE6AA0228BEF60E152B6A /* Pods-Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		C3E30955B305E47BC30126DCC915E826 /* CBus.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CBus.m; sourceTree = "<group>"; };
-		C5F78FC172EE522BDE899B8E6C1F2D78 /* CBus-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "CBus-Info.plist"; sourceTree = "<group>"; };
+		C35191CCBA80AFE3EBD5607FCC861127 /* CBusDispatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusDispatcher.h; sourceTree = "<group>"; };
+		C6D5779FCA1DCCB13B38683171CC3E94 /* CBusResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CBusResponse.m; sourceTree = "<group>"; };
+		C8E412424526942481D360B01895371E /* CBus-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CBus-prefix.pch"; sourceTree = "<group>"; };
 		C958FFB0FBD2840D79950F3B1443F287 /* Pods-Example-UserModule.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Example-UserModule.modulemap"; sourceTree = "<group>"; };
-		CDD1B1087D8E2ACAFF4D52D583115F90 /* CBusComponentInterceptor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusComponentInterceptor.h; sourceTree = "<group>"; };
-		CF5447023164C79E172EC4CCF4FADB1D /* CBusDefines.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBusDefines.h; path = Sources/CBusDefines.h; sourceTree = "<group>"; };
 		D3101BF515326E631715EE1A144FCF5B /* Pods-Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Example-dummy.m"; sourceTree = "<group>"; };
-		D41D11738301B80DF704F9F0E1DFAE65 /* CBus-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CBus-umbrella.h"; sourceTree = "<group>"; };
-		D60C8ED0A42B95A71108B66070E99C50 /* CBus+Register.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CBus+Register.h"; sourceTree = "<group>"; };
+		D95E9A220598B83DF1C6AC86BC9E0C3E /* CBus+Register.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CBus+Register.h"; sourceTree = "<group>"; };
+		D9C5496E5AD2FDDBECFAC006A181F32C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		DCBCC7BD53D25E94416DB12CF950CE71 /* CBusAsyncCall.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CBusAsyncCall.m; sourceTree = "<group>"; };
 		E1220B06EAEE54C315BDC340F6D9979D /* Pods-Example-HomeModule-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Example-HomeModule-acknowledgements.plist"; sourceTree = "<group>"; };
+		E83D539690899E354C42E78317F4A1F1 /* CBusInterceptorChain.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CBusInterceptorChain.m; sourceTree = "<group>"; };
+		EB0F99DD1FFDD6CC8014636EAE40673B /* CBusTimeoutInterceptor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusTimeoutInterceptor.h; sourceTree = "<group>"; };
+		EE0B93392018203B48843DD19894E539 /* CBusResponseInterceptor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CBusResponseInterceptor.m; sourceTree = "<group>"; };
 		EF202F057B4045037872D48AF8B63EA6 /* Pods-Example-UserModule-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Example-UserModule-Info.plist"; sourceTree = "<group>"; };
-		F977493CC55024B72ED465CEF4471D0E /* CBus+LifeCycle.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CBus+LifeCycle.m"; sourceTree = "<group>"; };
+		F3C2A22A9C5E996B3AA0ECCB806A5F77 /* CBus.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CBus.m; sourceTree = "<group>"; };
+		F5AF8A2EA5545B42686F8F2BA18790DA /* CBus.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBus.h; sourceTree = "<group>"; };
+		F739352B9FE5022D5C2021539ADA5514 /* CBusDispatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CBusDispatcher.m; sourceTree = "<group>"; };
 		F9E5FA494400C50FB41DC6CF9850C2AB /* Pods-Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Example-Info.plist"; sourceTree = "<group>"; };
 		FAA9682872E20635FEED2ACE2BDBA366 /* Pods-Example-HomeModule-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Example-HomeModule-acknowledgements.markdown"; sourceTree = "<group>"; };
-		FD1C802BEC249C39CD4DB5537910CAD0 /* CBus-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CBus-prefix.pch"; sourceTree = "<group>"; };
-		FF6235012B5057010D613D4F7096270F /* CBusComponentRegister.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CBusComponentRegister.m; sourceTree = "<group>"; };
-		FFC073B01B7D162D6E9A6E626969EB8F /* CBusRealCall.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CBusRealCall.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +173,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		825F2528EA265636E9F78B2B026A6562 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A6E46FDE340E1F32E1E32FDE1767AB6F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		858179FF7E88F24EB2C17D122466E61A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -177,51 +189,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D493EC12E0B9EF7152CD2C89D2860924 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D7F8B2C9DE9528DEBAF86192B4A8559A /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		101FF108971F4E1F8721130271E209DB /* Exception */ = {
-			isa = PBXGroup;
-			children = (
-				4F1D8E78000981A52333073C16A1D2F3 /* CBusException.h */,
-				18FAD07643829FF6E372BBBD4B4134C3 /* CBusException.m */,
-			);
-			name = Exception;
-			path = Sources/Exception;
-			sourceTree = "<group>";
-		};
-		1B5C0026D1361E9F737130F3A60E06E5 /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				033462D5230E8DF85119F6FBBB4CA99F /* CBus.podspec */,
-				86349358EC88F315DEB52245C1B5682E /* README.md */,
-			);
-			name = Pod;
-			sourceTree = "<group>";
-		};
-		1E9973DC6F4C5A0770E252AFEDF36DDA /* Interceptor */ = {
-			isa = PBXGroup;
-			children = (
-				CDD1B1087D8E2ACAFF4D52D583115F90 /* CBusComponentInterceptor.h */,
-				86186A30155EE6FF47653335506993FE /* CBusComponentInterceptor.m */,
-				74F0E8AC4A9B7C6931623284A8F33CBF /* CBusInterceptor.h */,
-				2AAD749638F3E1C0009C1C053A7C27E1 /* CBusInterceptorChain.h */,
-				04838BB7B7894D044DA5B003FA030D00 /* CBusInterceptorChain.m */,
-				0A61DDA66CB78EFA4FE021BA89AEB8AE /* CBusResponseInterceptor.h */,
-				10F3639896B38EC0D8C921EDE867BFA2 /* CBusResponseInterceptor.m */,
-			);
-			name = Interceptor;
-			path = Sources/Interceptor;
-			sourceTree = "<group>";
-		};
 		2B0E9EFC4E67C01FAA6E5C1959FE11D4 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,39 +200,6 @@
 				3DAD1E2D1613C3568409784F6AC12C30 /* Pods-Example-UserModule */,
 			);
 			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		38E1DCA28C6F11D223999F419D9090DA /* CallRequest */ = {
-			isa = PBXGroup;
-			children = (
-				1D7AA4BC01A91E419A21D14EA238E9E0 /* CBusAsyncCall.h */,
-				A867F8AAB957A2854CF95457089AA57E /* CBusAsyncCall.m */,
-				961950510AEC8134E8B44280A97035CE /* CBusCall.h */,
-				FFC073B01B7D162D6E9A6E626969EB8F /* CBusRealCall.h */,
-				9A2C2026EAED2F38BBC575F259B067D8 /* CBusRealCall.m */,
-				A5093564EACF26FD20B1BB89398DA1EF /* CBusRequest.h */,
-				126606E6C7C2E6362DDF4513E06F7E37 /* CBusRequest.m */,
-				65659A60EE04E8CD3D25BD4D26D2122D /* CBusResponse.h */,
-				42664E8F8C102DAD350B2D682C2DCEFE /* CBusResponse.m */,
-			);
-			name = CallRequest;
-			path = Sources/CallRequest;
-			sourceTree = "<group>";
-		};
-		3C2D3B417F2D915D144A0DC668A02070 /* CBus */ = {
-			isa = PBXGroup;
-			children = (
-				2C92E1D2B24CFCE24B84FB57BA2CD5C9 /* CBusComponent.h */,
-				CF5447023164C79E172EC4CCF4FADB1D /* CBusDefines.h */,
-				38E1DCA28C6F11D223999F419D9090DA /* CallRequest */,
-				B343B3A43964BDA0F901A1FA755A5907 /* Core */,
-				101FF108971F4E1F8721130271E209DB /* Exception */,
-				1E9973DC6F4C5A0770E252AFEDF36DDA /* Interceptor */,
-				1B5C0026D1361E9F737130F3A60E06E5 /* Pod */,
-				EBB89F3BB382132C1DF6A31C0622754F /* Support Files */,
-			);
-			name = CBus;
-			path = ../..;
 			sourceTree = "<group>";
 		};
 		3DAD1E2D1613C3568409784F6AC12C30 /* Pods-Example-UserModule */ = {
@@ -289,6 +226,22 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		61011F4482DDE99C45A8ECB1C5EA0A43 /* CBus */ = {
+			isa = PBXGroup;
+			children = (
+				996CB96C5FABB2D2EF369C5DDF5C155A /* CBusComponent.h */,
+				8A87B50B7A43835F9164BDD12F35599E /* CBusDefines.h */,
+				E5980C28A893F6BDD80B349F4628214C /* CallRequest */,
+				99833948E172B932CAFA6CC72B67B699 /* Core */,
+				BE6CCD41E11CCE96B0D3D5F247E1C4AA /* Exception */,
+				FD6BC7E8C1553068A97EB48BF842F152 /* Interceptor */,
+				CF015781E5ED8357AB177E44BF85B3E0 /* Pod */,
+				FC2205525A451E9F4D960E6D2633E659 /* Support Files */,
+			);
+			name = CBus;
+			path = ../..;
+			sourceTree = "<group>";
+		};
 		765A93FF3345B43470E8723037901CA7 /* Pods-Example-HomeModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -308,9 +261,29 @@
 		80848AD1D7BF4F498652B7B8509D7B70 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3C2D3B417F2D915D144A0DC668A02070 /* CBus */,
+				61011F4482DDE99C45A8ECB1C5EA0A43 /* CBus */,
 			);
 			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		99833948E172B932CAFA6CC72B67B699 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				F5AF8A2EA5545B42686F8F2BA18790DA /* CBus.h */,
+				F3C2A22A9C5E996B3AA0ECCB806A5F77 /* CBus.m */,
+				39CF20F223EE01B61CF7C7EF8EED4263 /* CBus+LifeCycle.h */,
+				3B1A1E9BF4CD136E8AB5A9D35E824D02 /* CBus+LifeCycle.m */,
+				D95E9A220598B83DF1C6AC86BC9E0C3E /* CBus+Register.h */,
+				A2270E65CDC2729670594FE23C86F70C /* CBus+Register.m */,
+				22C5A8E1E76465110AB9465B8CAFC2DB /* CBusClient.h */,
+				46299D4F910AD16519204F39511FCF27 /* CBusClient.m */,
+				52AA4955F5555BCD77EB008ED03BE753 /* CBusComponentRegister.h */,
+				4427CFA16A5130D7FAF3491F4CD43C52 /* CBusComponentRegister.m */,
+				C35191CCBA80AFE3EBD5607FCC861127 /* CBusDispatcher.h */,
+				F739352B9FE5022D5C2021539ADA5514 /* CBusDispatcher.m */,
+			);
+			name = Core;
+			path = Sources/Core;
 			sourceTree = "<group>";
 		};
 		A21A423F320DAC7573FED8B4EB2882C5 /* Products */ = {
@@ -324,24 +297,23 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B343B3A43964BDA0F901A1FA755A5907 /* Core */ = {
+		BE6CCD41E11CCE96B0D3D5F247E1C4AA /* Exception */ = {
 			isa = PBXGroup;
 			children = (
-				8443E36C18552BAEDA4266039CE52E24 /* CBus.h */,
-				C3E30955B305E47BC30126DCC915E826 /* CBus.m */,
-				33BCF2DBAC0EDDB99F3BFB022D533129 /* CBus+LifeCycle.h */,
-				F977493CC55024B72ED465CEF4471D0E /* CBus+LifeCycle.m */,
-				D60C8ED0A42B95A71108B66070E99C50 /* CBus+Register.h */,
-				1751069B12A0B313A547F62467D728A4 /* CBus+Register.m */,
-				234D4CEB431F236BEF5AEB5C6570D2A9 /* CBusClient.h */,
-				00AC65BE424C482CDF99097AF8B2E557 /* CBusClient.m */,
-				879888F1D2D5C66F4B478FD45C856D8F /* CBusComponentRegister.h */,
-				FF6235012B5057010D613D4F7096270F /* CBusComponentRegister.m */,
-				4D44953EB6A91317C0C3CC35FBE2E461 /* CBusDispatcher.h */,
-				485D1AFA86DABF0FA8DED8DC3EBB2543 /* CBusDispatcher.m */,
+				77649C8A39980D63BECCDDBAFE04BC49 /* CBusException.h */,
+				2A4343E4AB88DCFA5CFC48D0D8721BD4 /* CBusException.m */,
 			);
-			name = Core;
-			path = Sources/Core;
+			name = Exception;
+			path = Sources/Exception;
+			sourceTree = "<group>";
+		};
+		CF015781E5ED8357AB177E44BF85B3E0 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				687F2A252777B46870078A3DAEB663E1 /* CBus.podspec */,
+				D9C5496E5AD2FDDBECFAC006A181F32C /* README.md */,
+			);
+			name = Pod;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
@@ -363,6 +335,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E5980C28A893F6BDD80B349F4628214C /* CallRequest */ = {
+			isa = PBXGroup;
+			children = (
+				4301328B3FF4FD37A3AE4CD3023EF761 /* CBusAsyncCall.h */,
+				DCBCC7BD53D25E94416DB12CF950CE71 /* CBusAsyncCall.m */,
+				BD61FF9F1B6031C55EEDE5F3A855B150 /* CBusCall.h */,
+				356F66C8B9F623A3293E446265ECCAA3 /* CBusRealCall.h */,
+				7C0E8D6164EF2B8E38779D644D616B1F /* CBusRealCall.m */,
+				B10B3A0C5FC9F5F2DAE7A69108142CBF /* CBusRequest.h */,
+				C04D0B0CBC822094B5EA5BF953E6CACA /* CBusRequest.m */,
+				73D5826D1450F2B02EAB38EE6812184A /* CBusResponse.h */,
+				C6D5779FCA1DCCB13B38683171CC3E94 /* CBusResponse.m */,
+			);
+			name = CallRequest;
+			path = Sources/CallRequest;
+			sourceTree = "<group>";
+		};
 		EA8EDB8F3B5FD5F226507EF9A9CE59B9 /* Pods-Example */ = {
 			isa = PBXGroup;
 			children = (
@@ -380,24 +369,68 @@
 			path = "Target Support Files/Pods-Example";
 			sourceTree = "<group>";
 		};
-		EBB89F3BB382132C1DF6A31C0622754F /* Support Files */ = {
+		FC2205525A451E9F4D960E6D2633E659 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				A9F4E299592B544A23EA3F448907DD6F /* CBus.modulemap */,
-				AA2A5233501EEE1D03F0CDC73AA9707C /* CBus-dummy.m */,
-				C5F78FC172EE522BDE899B8E6C1F2D78 /* CBus-Info.plist */,
-				FD1C802BEC249C39CD4DB5537910CAD0 /* CBus-prefix.pch */,
-				D41D11738301B80DF704F9F0E1DFAE65 /* CBus-umbrella.h */,
-				674E8D98369FB98B586CDAF47BE61091 /* CBus.debug.xcconfig */,
-				B6D140FB9307A5402C74EFE6A156A9FE /* CBus.release.xcconfig */,
+				3FC6F10E9D0D450449826A0FD248B73D /* CBus.modulemap */,
+				A2B4586347A38A0EFA13C6A871D1CE87 /* CBus-dummy.m */,
+				63C0862315C5B20904925E8B321A1F11 /* CBus-Info.plist */,
+				C8E412424526942481D360B01895371E /* CBus-prefix.pch */,
+				7C121A301EEEB06F6561E6A42016F032 /* CBus-umbrella.h */,
+				BED408C2A35E424F94CB17F0618A024E /* CBus.debug.xcconfig */,
+				49239EC799E74C95D3AA90C1E270D5AD /* CBus.release.xcconfig */,
 			);
 			name = "Support Files";
 			path = "Example/Pods/Target Support Files/CBus";
 			sourceTree = "<group>";
 		};
+		FD6BC7E8C1553068A97EB48BF842F152 /* Interceptor */ = {
+			isa = PBXGroup;
+			children = (
+				60C4B4BD94103D8A3ACE77161CB8803F /* CBusComponentInterceptor.h */,
+				5A6B94E1690A767130D0176E0B011BDD /* CBusComponentInterceptor.m */,
+				08500D629149ACEC59C8EE1AF07C7F30 /* CBusInterceptor.h */,
+				77BEF31A58F2F12219D6423FC75C3AB6 /* CBusInterceptorChain.h */,
+				E83D539690899E354C42E78317F4A1F1 /* CBusInterceptorChain.m */,
+				3D27F9B63E66B7DCEF1FA6502B5B4627 /* CBusResponseInterceptor.h */,
+				EE0B93392018203B48843DD19894E539 /* CBusResponseInterceptor.m */,
+				EB0F99DD1FFDD6CC8014636EAE40673B /* CBusTimeoutInterceptor.h */,
+				AF89BBF927446CB04DC79ECA9F2A8F80 /* CBusTimeoutInterceptor.m */,
+			);
+			name = Interceptor;
+			path = Sources/Interceptor;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		07CEB1AF09EFC7E4A5BFD842FAE965C3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00BC64662594317E90C6F5C17F6F0742 /* CBus+LifeCycle.h in Headers */,
+				78F9408C27BA64F048D86D921522345E /* CBus+Register.h in Headers */,
+				E3A7DB0224DD52FD35C4B5DE7F792D34 /* CBus-umbrella.h in Headers */,
+				D4A3F414F4B02E0A9D0339A2A2A95CE8 /* CBus.h in Headers */,
+				FAC8F9B003315A93B397588C8A095ADB /* CBusAsyncCall.h in Headers */,
+				A4E236BA03AC50E9F4522F408AA14BE4 /* CBusCall.h in Headers */,
+				946790DC5AD71A9116224A220FD89E71 /* CBusClient.h in Headers */,
+				FC0FF43CCD26DB96E1BAD7AC2416BBE5 /* CBusComponent.h in Headers */,
+				021C1180730D7AF9517CDCA4CE98C4F9 /* CBusComponentInterceptor.h in Headers */,
+				79143C29CD2C73E61F6C1E813639E158 /* CBusComponentRegister.h in Headers */,
+				651437D7C2D601FC1C7F51D46C3EE3A6 /* CBusDefines.h in Headers */,
+				254ED7BE778E96BA04C208DE5F62EB1C /* CBusDispatcher.h in Headers */,
+				2F737051C652FEFE6CED40C370875E3C /* CBusException.h in Headers */,
+				8ABE225A061D45BA44F345F95170BB19 /* CBusInterceptor.h in Headers */,
+				C7DC0E5783E9B5EDEC5316AE5C7A1A89 /* CBusInterceptorChain.h in Headers */,
+				F661540F4E2F7F9FAEF9D7AC8794132C /* CBusRealCall.h in Headers */,
+				FD79FD1B5DFBD1E4B51A9FFDF11AAA28 /* CBusRequest.h in Headers */,
+				7E99E5D9D36A27EF1B2C59D51E59DCD6 /* CBusResponse.h in Headers */,
+				19B5EC50CBC8753CF5FA0E5228DD13E3 /* CBusResponseInterceptor.h in Headers */,
+				81C469B92152D3FD3D757E34679C3B92 /* CBusTimeoutInterceptor.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		16485807458B56EB890DA4CEF8A28F64 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -411,32 +444,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEF98488D9DADB40BC0D43329406D7E8 /* Pods-Example-HomeModule-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		623C1834844B2570DB590401809EF345 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				509BB689BCEF8B0B8DBAE43DC970FA90 /* CBus+LifeCycle.h in Headers */,
-				EA789C5BD80E87D9A89036A409B5CE39 /* CBus+Register.h in Headers */,
-				DCDB6A95F91F9705C5F14D0F9695B2A3 /* CBus-umbrella.h in Headers */,
-				399FD2F3AD1A5BFEA179B7645E31AF10 /* CBus.h in Headers */,
-				FB06C3587A03957231C1DEF48ACB0666 /* CBusAsyncCall.h in Headers */,
-				A60623383D07AD9A489ECCBFB01DC570 /* CBusCall.h in Headers */,
-				CD456F5C33291474B86F393338A59C2B /* CBusClient.h in Headers */,
-				7615C8BA042E3F97FA21CF0251E046F9 /* CBusComponent.h in Headers */,
-				5F7B1CCB7EC9F656A650A75F1234898D /* CBusComponentInterceptor.h in Headers */,
-				7E5F4C130975F842EED87B1F28E1F0CE /* CBusComponentRegister.h in Headers */,
-				C3F329CA7DE1AA21B659266A2193A337 /* CBusDefines.h in Headers */,
-				5AA4376B3F925DF0B67FBF0D10EA9145 /* CBusDispatcher.h in Headers */,
-				98DFFE8F97F8E3146AF716EAACCEC238 /* CBusException.h in Headers */,
-				CECB7036001A07F82F8B96D796B6A72B /* CBusInterceptor.h in Headers */,
-				34BDE24D2C2899AE5D56DC3AC13FEE92 /* CBusInterceptorChain.h in Headers */,
-				F47612CFD4C4C7752095B71BB0F599F8 /* CBusRealCall.h in Headers */,
-				59BDF648ED96DDE970EC48B411E31A21 /* CBusRequest.h in Headers */,
-				B57F867D6FB58081313149706AC2B194 /* CBusResponse.h in Headers */,
-				FA30ADB179E89550FFE7009477E3CD16 /* CBusResponseInterceptor.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,7 +470,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				EE0492317CD1BB9B8CC23A34748C2DDC /* PBXTargetDependency */,
+				1EBF63753300EA0DA82663B9639E1871 /* PBXTargetDependency */,
 			);
 			name = "Pods-Example";
 			productName = "Pods-Example";
@@ -482,7 +489,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				01F4D865EBF23E4E6CF16614EBBF7B31 /* PBXTargetDependency */,
+				61BEDCBC8533E00C462F40EA76EC07CD /* PBXTargetDependency */,
 			);
 			name = "Pods-Example-UserModule";
 			productName = "Pods-Example-UserModule";
@@ -491,12 +498,12 @@
 		};
 		AF7B38BF7176935A305F39BA6495CAC8 /* CBus */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D706259F1BC7472F654A2865571D4D80 /* Build configuration list for PBXNativeTarget "CBus" */;
+			buildConfigurationList = B725821B9FD0D3E3DFE2C03D740D5420 /* Build configuration list for PBXNativeTarget "CBus" */;
 			buildPhases = (
-				623C1834844B2570DB590401809EF345 /* Headers */,
-				0E05D8F77C12F3DA2B7F64006C377591 /* Sources */,
-				D493EC12E0B9EF7152CD2C89D2860924 /* Frameworks */,
-				FC5EE8350D6AA992236EB45D2B6F758B /* Resources */,
+				07CEB1AF09EFC7E4A5BFD842FAE965C3 /* Headers */,
+				4E0C52CCB1A61021328A1E8EE0F1225B /* Sources */,
+				825F2528EA265636E9F78B2B026A6562 /* Frameworks */,
+				52D221046536515E5354A639F37B6D97 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -519,7 +526,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				F5B717FDDE9436650776BDED9E840296 /* PBXTargetDependency */,
+				D9446848EB80B4B71EBE82A5A6196CD2 /* PBXTargetDependency */,
 			);
 			name = "Pods-Example-HomeModule";
 			productName = "Pods-Example-HomeModule";
@@ -564,6 +571,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		52D221046536515E5354A639F37B6D97 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8E97E289A0CA8148ADAE04833528F814 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -578,35 +592,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FC5EE8350D6AA992236EB45D2B6F758B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		0E05D8F77C12F3DA2B7F64006C377591 /* Sources */ = {
+		4E0C52CCB1A61021328A1E8EE0F1225B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36CC2FA7DCCE3E03CDA7C9156C93C471 /* CBus+LifeCycle.m in Sources */,
-				B83115FF6B2BB0014A356BA0B6E5E996 /* CBus+Register.m in Sources */,
-				70E647F909FF766A933F77F91C35DC61 /* CBus-dummy.m in Sources */,
-				8E8FDC52888245467502E9945F0CB4D7 /* CBus.m in Sources */,
-				8C7DC67C7F3C576A6148CE3D89F72A60 /* CBusAsyncCall.m in Sources */,
-				6362B1B066E2DBC36957D9F489569258 /* CBusClient.m in Sources */,
-				FF00E3BB1A7E54EABEB3CC8D25678852 /* CBusComponentInterceptor.m in Sources */,
-				DB838DF5EDCD36EE15773A32DA1D6F8E /* CBusComponentRegister.m in Sources */,
-				0A23DF8DC4530CF899FC33A2E542425F /* CBusDispatcher.m in Sources */,
-				51DAAB10B0104106B2DCF59FF860827C /* CBusException.m in Sources */,
-				4C2376F08C32DB00F1BD8E4E968DE692 /* CBusInterceptorChain.m in Sources */,
-				DFAB0B3A5032C3C61E740DA4221E58AA /* CBusRealCall.m in Sources */,
-				713DCAC2BA8A29BB8FB9C5C4F950560C /* CBusRequest.m in Sources */,
-				6CA0F50709C1FD9F692EEE3C55D72BAF /* CBusResponse.m in Sources */,
-				F7E13C36BCB15E0AD2CE746E2569F29B /* CBusResponseInterceptor.m in Sources */,
+				378B917D9577DF14D7BEFC75E541F924 /* CBus+LifeCycle.m in Sources */,
+				D29C726B77E1FCE5C0B56C875D4583F0 /* CBus+Register.m in Sources */,
+				358D0CFEDFBB01BC19001D6A78F03D05 /* CBus-dummy.m in Sources */,
+				89DFF84718C988C042466E1488D97BDE /* CBus.m in Sources */,
+				327C54656405000EBDDBE3601F8D60D3 /* CBusAsyncCall.m in Sources */,
+				BBD38304C2AA434AED7C2918C8D13525 /* CBusClient.m in Sources */,
+				FE93F1A48CFBFC04A9BDE8EDFE4ED6C6 /* CBusComponentInterceptor.m in Sources */,
+				67614CAE20781E38D107F3119E50AAE7 /* CBusComponentRegister.m in Sources */,
+				900788334161B90A21FCF521D1B2ADB8 /* CBusDispatcher.m in Sources */,
+				4C8F9F18F509AF6F994058143ADAC436 /* CBusException.m in Sources */,
+				1BB54702066296438F43B641C5908EF3 /* CBusInterceptorChain.m in Sources */,
+				D11DE4AA340031CF302AAA15DE1A0C22 /* CBusRealCall.m in Sources */,
+				18F47F8CDE20F264D7F6EC4626F73357 /* CBusRequest.m in Sources */,
+				F0BCBB9BA82E39DA847368FAABFE29C8 /* CBusResponse.m in Sources */,
+				2287AD986AE143132AFBFF19A6696B4A /* CBusResponseInterceptor.m in Sources */,
+				A5A679D43E3089CF0A979C1733B9C485 /* CBusTimeoutInterceptor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -637,27 +645,61 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		01F4D865EBF23E4E6CF16614EBBF7B31 /* PBXTargetDependency */ = {
+		1EBF63753300EA0DA82663B9639E1871 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CBus;
 			target = AF7B38BF7176935A305F39BA6495CAC8 /* CBus */;
-			targetProxy = 472D2A66F86307E68CFF0CBECD21428A /* PBXContainerItemProxy */;
+			targetProxy = CDC02B25F8730304F5A10A978092FDF5 /* PBXContainerItemProxy */;
 		};
-		EE0492317CD1BB9B8CC23A34748C2DDC /* PBXTargetDependency */ = {
+		61BEDCBC8533E00C462F40EA76EC07CD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CBus;
 			target = AF7B38BF7176935A305F39BA6495CAC8 /* CBus */;
-			targetProxy = 7570B85635CBBED8E7BD750A9265C1E4 /* PBXContainerItemProxy */;
+			targetProxy = 20CB7C6FF4D95309F2AF3A98B0213437 /* PBXContainerItemProxy */;
 		};
-		F5B717FDDE9436650776BDED9E840296 /* PBXTargetDependency */ = {
+		D9446848EB80B4B71EBE82A5A6196CD2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CBus;
 			target = AF7B38BF7176935A305F39BA6495CAC8 /* CBus */;
-			targetProxy = D784EDEF911B37C606BE855ACBA91527 /* PBXContainerItemProxy */;
+			targetProxy = C5360B0770C915D4E52C57995DEE4E34 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		1226CC28761803972756C2435CCDCD9B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49239EC799E74C95D3AA90C1E270D5AD /* CBus.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/CBus/CBus-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/CBus/CBus-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/CBus/CBus.modulemap";
+				PRODUCT_MODULE_NAME = CBus;
+				PRODUCT_NAME = CBus;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		1FEEF9428153E946B01BF69A70A89820 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6D4986FC0487C69E234BA2B291A7FC38 /* Pods-Example-HomeModule.debug.xcconfig */;
@@ -911,39 +953,6 @@
 			};
 			name = Debug;
 		};
-		BDD3A07FC7C68DC8D29CEE0ABAAFF3BC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 674E8D98369FB98B586CDAF47BE61091 /* CBus.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/CBus/CBus-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/CBus/CBus-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/CBus/CBus.modulemap";
-				PRODUCT_MODULE_NAME = CBus;
-				PRODUCT_NAME = CBus;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		C605C363CC9F26F9FF97DBB1D5C6E25C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1006,40 +1015,6 @@
 			};
 			name = Release;
 		};
-		CA2ECF12EFD174CEB85C2409FA2118DA /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B6D140FB9307A5402C74EFE6A156A9FE /* CBus.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/CBus/CBus-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/CBus/CBus-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/CBus/CBus.modulemap";
-				PRODUCT_MODULE_NAME = CBus;
-				PRODUCT_NAME = CBus;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		F1BE68FF47A9DEC4A43AD937A005DB34 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7D824BC0DEE8D08E2603750FB3EE9D93 /* Pods-Example-UserModule.release.xcconfig */;
@@ -1078,6 +1053,39 @@
 			};
 			name = Release;
 		};
+		FCA3C40DE7DDA2E0CC04D655991DFC9C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BED408C2A35E424F94CB17F0618A024E /* CBus.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/CBus/CBus-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/CBus/CBus-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/CBus/CBus.modulemap";
+				PRODUCT_MODULE_NAME = CBus;
+				PRODUCT_NAME = CBus;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1108,20 +1116,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		B725821B9FD0D3E3DFE2C03D740D5420 /* Build configuration list for PBXNativeTarget "CBus" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCA3C40DE7DDA2E0CC04D655991DFC9C /* Debug */,
+				1226CC28761803972756C2435CCDCD9B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C45EBC9722681F18E6C3F64E01C56849 /* Build configuration list for PBXNativeTarget "Pods-Example-HomeModule" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1FEEF9428153E946B01BF69A70A89820 /* Debug */,
 				AEA20E08E8A71951D42BC30B80CD818E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D706259F1BC7472F654A2865571D4D80 /* Build configuration list for PBXNativeTarget "CBus" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BDD3A07FC7C68DC8D29CEE0ABAAFF3BC /* Debug */,
-				CA2ECF12EFD174CEB85C2409FA2118DA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

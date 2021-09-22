@@ -136,6 +136,11 @@ void CBusResigterComponent(Class cmpClass) {
 }
 
 + (void)registerDynamicComponentForClass:(Class)componentClass {
+    NSString *componentName = CBusNameForComponentClass(componentClass);
+    [self registerDynamicComponentForName:componentName cls:componentClass];
+}
+
++ (void)registerDynamicComponentForName:(NSString *)componentName cls:(Class)componentClass {
     if (![componentClass conformsToProtocol:@protocol(CBusComponent)]) {
         NSDictionary *extInfo = @{@"componentClass": NSStringFromClass(componentClass)};
         [CBusException boom:CBusCodeNotConformsToProtocol extraInfo:extInfo];
@@ -146,7 +151,6 @@ void CBusResigterComponent(Class cmpClass) {
         return;
     }
     
-    NSString *componentName = CBusNameForComponentClass(componentClass);
     id<CBusComponent> oldCmp = (id<CBusComponent>)CBusGetDynamicComponentMap()[componentName];
     id<CBusComponent> newCmp = (id<CBusComponent>)[componentClass new];
     

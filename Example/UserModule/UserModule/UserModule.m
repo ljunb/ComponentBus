@@ -13,6 +13,7 @@
 CBUS_COMPONENT(user)
 
 CBUS_ACTION(userInfo) {
+    [NSThread sleepForTimeInterval:3];
     CBusResponse *response = [CBusResponse success:@{@"userInfo": @{@"name": @"cbus", @"address": @"guangzhou"}}];
     [cbus finished:response];
 }

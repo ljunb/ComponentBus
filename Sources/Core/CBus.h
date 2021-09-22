@@ -47,8 +47,23 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) BOOL isFinished;
 /// 是否取消
 @property (nonatomic, assign, readonly) BOOL isCanceled;
+/// 是否超时
+@property (nonatomic, assign, readonly) BOOL isTimeout;
 
 #pragma mark init request
+/**
+ * 快速发起一个同步CBusRequest
+ *
+ * @param component 组件名称
+ * @param action 目标事件名称
+ * @param params 请求参数
+ * @param timeout 超时设置
+ * @return CBus实例，可通过实例取得对应的request、response
+ */
++ (CBus *)callRequestWithComponent:(NSString *)component
+                            action:(NSString *)action
+                            params:(nullable NSDictionary *)params
+                           timeout:(NSTimeInterval)timeout;
 /**
  * 快速发起一个同步CBusRequest
  *
@@ -58,8 +73,29 @@ NS_ASSUME_NONNULL_BEGIN
  * @return CBus实例，可通过实例取得对应的request、response
  */
 + (CBus *)callRequestWithComponent:(NSString *)component action:(NSString *)action params:(nullable NSDictionary *)params;
+/**
+ * 快速发起一个同步CBusRequest
+ *
+ * @param component 组件名称
+ * @param action 目标事件名称
+ * @return CBus实例，可通过实例取得对应的request、response
+ */
 + (CBus *)callRequestWithComponent:(NSString *)component action:(NSString *)action;
 
+/**
+ * 快速发起一个异步CBusRequest
+ *
+ * @param component 组件名称
+ * @param action 目标事件名称
+ * @param params 请求参数
+ * @param timeout 超时设置
+ * @param complete 结束回调
+ */
++ (void)asyncCallRequestWithComponent:(NSString *)component
+                               action:(NSString *)action
+                               params:(nullable NSDictionary *)params
+                              timeout:(NSTimeInterval)timeout
+                             complete:(nullable CBusAsyncCallCompletion)complete;
 /**
  * 快速发起一个异步CBusRequest
  *
@@ -72,9 +108,36 @@ NS_ASSUME_NONNULL_BEGIN
                                action:(NSString *)action
                                params:(nullable NSDictionary *)params
                              complete:(nullable CBusAsyncCallCompletion)complete;
+/**
+ * 快速发起一个异步CBusRequest
+ *
+ * @param component 组件名称
+ * @param action 目标事件名称
+ * @param params 请求参数
+ */
 + (void)asyncCallRequestWithComponent:(NSString *)component action:(NSString *)action params:(nullable NSDictionary *)params;
+/**
+ * 快速发起一个异步CBusRequest
+ *
+ * @param component 组件名称
+ * @param action 目标事件名称
+ */
 + (void)asyncCallRequestWithComponent:(NSString *)component action:(NSString *)action;
 
+/**
+ * 快速发起一个异步CBusRequest，并将结束回调抛到主线程
+ *
+ * @param component 组件名称
+ * @param action 目标事件名称
+ * @param params 请求参数
+ * @param timeout 超时设置
+ * @param complete 结束回调，将切回主线程
+ */
++ (void)asyncCallRequestWithComponent:(NSString *)component
+                               action:(NSString *)action
+                               params:(nullable NSDictionary *)params
+                              timeout:(NSTimeInterval)timeout
+                 completeOnMainThread:(nullable CBusAsyncCallCompletion)complete;
 /**
  * 快速发起一个异步CBusRequest，并将结束回调抛到主线程
  *
@@ -112,6 +175,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 取消当前调用
 - (void)cancel;
+
+/// 设置当前调用超时
+- (void)timedout;
 
 /// 等待一个异步响应
 - (void)waitResponse;

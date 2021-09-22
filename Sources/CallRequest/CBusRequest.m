@@ -7,7 +7,9 @@
 
 #import "CBusRequest.h"
 
-@implementation CBusRequest
+@implementation CBusRequest {
+    NSMutableArray *_innerInterceptors;
+}
 
 @synthesize component = _component;
 @synthesize action = _action;
@@ -16,7 +18,7 @@
 @synthesize isDeliverOnMainThread = _isDeliverOnMainThread;
 
 + (instancetype)requestWithComponent:(NSString *)component action:(NSString *)action params:(NSDictionary *)params {
-    return [self requestWithComponent:component action:action params:params timeout:2];
+    return [self requestWithComponent:component action:action params:params timeout:0];
 }
 
 + (instancetype)requestWithComponent:(NSString *)component action:(NSString *)action params:(NSDictionary *)params timeout:(NSTimeInterval)timeout {
@@ -31,6 +33,7 @@
     NSAssert(action && action.length > 0, @"action is nil!");
     
     if (self = [super init]) {
+        _innerInterceptors = [NSMutableArray array];
         _component = component;
         _action = action;
         _params = params;
@@ -42,6 +45,29 @@
 - (void)deliverOnMainThread {
     _isDeliverOnMainThread = YES;
 }
+
+- (void)addInterceptor:(id<CBusInterceptor>)interceptor {
+    if (!interceptor) {
+        return;
+    }
+    [_innerInterceptors addObject:interceptor];
+}
+
+- (void)addInterceptors:(NSArray<id<CBusInterceptor>> *)interceptors {
+    if (!interceptors) {
+        return;
+    }
+    [_innerInterceptors addObjectsFromArray:interceptors];
+}
+
+- (NSArray<id<CBusInterceptor>> *)interceptors {
+    return [_innerInterceptors copy];
+}
+
+- (void)setTimeout:(NSTimeInterval)timeout {
+    _timeout = timeout;
+}
+
 
 - (NSString *)description {
     return [NSString stringWithFormat:@"CBusRequest: component=%@, action=%@, params: %@", _component, _action, _params];

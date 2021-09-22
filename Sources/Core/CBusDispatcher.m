@@ -7,28 +7,15 @@
 
 #import "CBusDispatcher.h"
 #import "CBus.h"
-#import "CBusComponentRegister.h"
-#import "CBusRealCall.h"
 #import "CBusAsyncCall.h"
 #import "CBusException.h"
 
 @implementation CBusDispatcher {
-    NSMutableArray<CBusRealCall *> *_runningSyncCalls;
-    NSMutableArray<CBusAsyncCall *> *_runningAsyncCalls;
-    NSMutableArray<CBusAsyncCall *> *_readyAsyncCalls;
-    
-    dispatch_semaphore_t _lock;
     NSOperationQueue *_dispatchQueue;
 }
 
 - (instancetype)init {
     if (self = [super init]) {
-        _lock = dispatch_semaphore_create(1);
-        
-        _runningSyncCalls = [NSMutableArray array];
-        _runningAsyncCalls = [NSMutableArray array];
-        _readyAsyncCalls = [NSMutableArray array];
-        
         _dispatchQueue = [[NSOperationQueue alloc] init];
         _dispatchQueue.maxConcurrentOperationCount = 64;
         _dispatchQueue.name = @"com.xiaopeng.cbus_dispatcher_async_queue";
@@ -36,27 +23,9 @@
     return self;
 }
 
-- (void)beginCall:(id<CBusCall>)call {
-    if ([call isKindOfClass:[CBusRealCall class]]) {
-        [self executed:(CBusRealCall *)call];
-    } else if ([call isKindOfClass:[CBusAsyncCall class]]) {
-        [self enqueue:(CBusAsyncCall *)call];
-    }
-}
-
-- (void)executed:(CBusRealCall *)call {
-    CBus_LOCK(_lock);
-    [_runningSyncCalls addObject:call];
-    CBus_UNLOCK(_lock);
-}
-
 - (void)enqueue:(CBusAsyncCall *)asyncCall {
     // 加入队列
     [_dispatchQueue addOperation:asyncCall];
-    
-    CBus_LOCK(_lock);
-    [_runningAsyncCalls addObject:asyncCall];
-    CBus_UNLOCK(_lock);
 }
 
 - (void)onResult:(CBus *)cbus completion:(CBusAsyncCallCompletion)completion {
@@ -71,28 +40,6 @@
     } else {
         completion(cbus);
     }
-}
-
-- (void)finishedCall:(id<CBusCall>)call {
-    if ([call isKindOfClass:[CBusRealCall class]]) {
-        [self finishedRealCall:(CBusRealCall *)call];
-    } else if ([call isKindOfClass:[CBusAsyncCall class]]) {
-        [self finishedAsyncCall:(CBusAsyncCall *)call];
-    }
-}
-
-- (void)finishedRealCall:(CBusRealCall *)call {
-    // todo: 结束调用后，移除不再计算超时
-    CBus_LOCK(_lock);
-    [_runningSyncCalls removeObject:call];
-    CBus_UNLOCK(_lock);
-}
-
-- (void)finishedAsyncCall:(CBusAsyncCall *)asyncCall {
-    // todo: 结束调用后，移除不再计算超时
-    CBus_LOCK(_lock);
-    [_runningAsyncCalls removeObject:asyncCall];
-    CBus_UNLOCK(_lock);
 }
 
 - (void)cancelAllCalls {

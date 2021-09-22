@@ -7,6 +7,7 @@
 
 #import "CBusInterceptorChain.h"
 #import "CBusException.h"
+#import "CBus.h"
 
 @implementation CBusInterceptorChain {
     NSArray<id<CBusInterceptor>> *_interceptors;
@@ -53,6 +54,10 @@
     _calls++;
     if (_calls > 1) {
         [CBusException boom:CBusCodeUnknown];
+    }
+    
+    if (_innerCbus.isTimeout || _innerCbus.isCanceled) {
+        return _innerCbus.response;
     }
     
     CBusInterceptorChain *next = [CBusInterceptorChain chainWithInterceptors:_interceptors

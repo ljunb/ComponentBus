@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * 根据组件名称返回对应实例
- * @param cmpName 组件名称
+ * @param componentName 组件名称
  * @return 组件实例，静态组件or动态组件
  */
 + (id<CBusComponent>)componentInstanceForName:(NSString *)componentName;
@@ -33,6 +33,13 @@ NS_ASSUME_NONNULL_BEGIN
  * @param componentClass 组件类型
  */
 + (void)registerDynamicComponentForClass:(Class)componentClass;
+
+/**
+ * 通过给定名称和类型动态注册一个组件
+ * @param componentName 组件名称
+ * @param componentClass 组件类型
+ */
++ (void)registerDynamicComponentForName:(NSString *)componentName cls:(Class)componentClass;
 
 /**
  * 通过类型取消注册一个动态组件

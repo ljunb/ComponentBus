@@ -36,4 +36,11 @@
     [_innerInterceptors addObject:interceptor];
 }
 
+- (void)addInterceptors:(NSArray<id<CBusInterceptor>> *)interceptors {
+    if (!interceptors) {
+        return;
+    }
+    [_innerInterceptors addObjectsFromArray:interceptors];
+}
+
 @end

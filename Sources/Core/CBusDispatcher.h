@@ -8,23 +8,17 @@
 #import <Foundation/Foundation.h>
 #import "CBusDefines.h"
 
-@protocol CBusCall;
+@class CBusAsyncCall;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CBusDispatcher : NSObject
 
 /**
- * 开始执行一个调用
- * @param call 同步或异步调用实体
+ * 开始执行一个异步调用
+ * @param asyncCall 异步调用实体
  */
-- (void)beginCall:(id<CBusCall>)call;
-
-/**
- * 结束一个调用，从内存中进行超时管理的字典中移除
- * @param call 同步或异步调用的实例
- */
-- (void)finishedCall:(id<CBusCall>)call;
+- (void)enqueue:(CBusAsyncCall *)asyncCall;
 
 /**
  * 触发异步方法回调

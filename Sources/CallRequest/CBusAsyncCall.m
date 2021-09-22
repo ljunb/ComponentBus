@@ -62,12 +62,10 @@
         [_cbus finished:response];
         [_realCall.client.dispatcher onResult:_cbus completion:_completion];
     } @catch (NSException *exception) {
-        // todo: handle timeout
         NSLog(@"NSException %@", [exception userInfo]);
     } @finally {
         // invoke if current thread wake up
         [self done];
-        [_realCall.client.dispatcher finishedCall:self];
     }
 }
 

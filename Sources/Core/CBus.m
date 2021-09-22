@@ -11,6 +11,7 @@
 #import "CBusRealCall.h"
 #import "CBusComponentRegister.h"
 #import "CBusComponent.h"
+#import "CBusException.h"
 
 /**
  * CBus将内置一个默认的CBusClient，管理着默认的CBusDispatcher
@@ -39,6 +40,7 @@ static BOOL _isEnableLog = NO;
 @synthesize response = _response;
 @synthesize isFinished = _isFinished;
 @synthesize isCanceled = _isCanceled;
+@synthesize isTimeout = _isTimeout;
 
 
 #pragma mark - CBus config
@@ -89,7 +91,14 @@ static BOOL _isEnableLog = NO;
 }
 
 + (CBus *)callRequestWithComponent:(NSString *)component action:(NSString *)action params:(NSDictionary *)params {
-    CBusRequest *request = [CBusRequest requestWithComponent:component action:action params:params];
+    return [self callRequestWithComponent:component action:action params:params timeout:CBusRequestSyncTimeout];
+}
+
++ (CBus *)callRequestWithComponent:(NSString *)component action:(NSString *)action params:(NSDictionary *)params timeout:(NSTimeInterval)timeout {
+    CBusRequest *request = [CBusRequest requestWithComponent:component
+                                                      action:action
+                                                      params:params
+                                                     timeout:timeout];
     return [self execute:request];
 }
 
@@ -105,7 +114,22 @@ static BOOL _isEnableLog = NO;
                                action:(NSString *)action
                                params:(NSDictionary *)params
                              complete:(CBusAsyncCallCompletion)complete {
-    CBusRequest *request = [CBusRequest requestWithComponent:component action:action params:params];
+    CBusRequest *request = [CBusRequest requestWithComponent:component
+                                                      action:action
+                                                      params:params
+                                                     timeout:CBusRequestAsyncTimeout];
+    [self enqueue:request complete:complete];
+}
+
++ (void)asyncCallRequestWithComponent:(NSString *)component
+                               action:(NSString *)action
+                               params:(NSDictionary *)params
+                              timeout:(NSTimeInterval)timeout
+                             complete:(CBusAsyncCallCompletion)complete {
+    CBusRequest *request = [CBusRequest requestWithComponent:component
+                                                      action:action
+                                                      params:params
+                                                     timeout:timeout];
     [self enqueue:request complete:complete];
 }
 
@@ -113,14 +137,27 @@ static BOOL _isEnableLog = NO;
                                action:(NSString *)action
                                params:(NSDictionary *)params
                  completeOnMainThread:(CBusAsyncCallCompletion)complete {
-    CBusRequest *request = [CBusRequest requestWithComponent:component action:action params:params];
+    [self asyncCallRequestWithComponent:component
+                                 action:action
+                                 params:params
+                                timeout:CBusRequestAsyncTimeout
+                   completeOnMainThread:complete];
+}
+
++ (void)asyncCallRequestWithComponent:(NSString *)component
+                               action:(NSString *)action
+                               params:(NSDictionary *)params
+                              timeout:(NSTimeInterval)timeout
+                 completeOnMainThread:(CBusAsyncCallCompletion)complete {
+    CBusRequest *request = [CBusRequest requestWithComponent:component action:action params:params timeout:timeout];
     [request deliverOnMainThread];
     [self enqueue:request complete:complete];
 }
 
 + (CBus *)execute:(CBusRequest *)request {
     CBus *cbus = [CBus cbusWithRequest:request];
-    [[cbus.client newCall:cbus] execute];
+    CBusResponse *response = [[cbus.client newCall:cbus] execute];
+    [cbus finished:response];
     return cbus;
 }
 
@@ -151,6 +188,14 @@ static BOOL _isEnableLog = NO;
     [_waitingLock lock];
     _isCanceled = YES;
     [_waitingLock unlock];
+    [self finished:[CBusResponse errorCode:CBusCodeCanceled]];
+}
+
+- (void)timedout {
+    [_waitingLock lock];
+    _isTimeout = YES;
+    [_waitingLock unlock];
+    [self finished:[CBusResponse errorCode:CBusCodeTimeout]];
 }
 
 - (void)waitResponse {

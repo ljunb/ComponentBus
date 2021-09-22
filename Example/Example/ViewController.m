@@ -21,14 +21,14 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self testAsyncCompleteOnMainThread];
+    [self testSyncAction];
 }
 
 - (void)testSyncAction {
-    CBus *cbus = [CBus callRequestWithComponent:@"use1r" action:@"userInfo" params:@{@"name": @"cbus"}];
-    if (cbus.response.success) {
-        NSLog(@"CBus response: %@", cbus.response);
-    }
+    NSLog(@"testSyncAction start: %f", NSTimeIntervalSince1970);
+    CBus *cbus = [CBus callRequestWithComponent:@"user" action:@"userInfo" params:@{@"name": @"cbus"} timeout:0.5];
+    NSLog(@"testSyncAction end: %f", NSTimeIntervalSince1970);
+    NSLog(@"CBus response: %@", cbus.response);
 }
 
 - (void)testAsyncAction {

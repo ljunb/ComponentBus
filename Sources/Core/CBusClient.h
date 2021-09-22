@@ -33,6 +33,11 @@ NS_ASSUME_NONNULL_BEGIN
  * @param interceptor 拦截器实例
  */
 - (void)addInterceptor:(id<CBusInterceptor>)interceptor;
+/**
+ * 批量添加拦截器
+ * @param interceptors 拦截器列表
+ */
+- (void)addInterceptors:(NSArray<id<CBusInterceptor>> *)interceptors;
 
 @end
 
